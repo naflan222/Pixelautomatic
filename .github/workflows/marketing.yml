@@ -1,0 +1,98 @@
+name: Pixelhouse Facebook + Instagram
+
+on:
+  schedule:
+    # UTC: 03:00 = 08:30 Colombo; 13:00 = 18:30 Colombo.
+    # Run videos daily at cron level; Python enforces the three-calendar-day cadence.
+    - cron: '0 3 * * *'
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'Start with preview; initialize and check before enabling publishing'
+        type: choice
+        default: preview
+        options: [preview, initialize, check, publish, reconcile, resolve]
+      kind:
+        description: Content format
+        type: choice
+        default: image
+        options: [image, video]
+      slot:
+        description: 'resolve only: YYYY-MM-DD-image or YYYY-MM-DD-video'
+        type: string
+        required: false
+      platform:
+        description: Platform to resolve
+        type: choice
+        default: facebook
+        options: [facebook, instagram]
+      resolution:
+        description: 'resolve only: check your real account before selecting verified_absent'
+        type: choice
+        default: none
+        options: [none, published, verified_absent, cancel]
+      remote_id:
+        description: 'resolve/published only: real numeric media or post ID'
+        type: string
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pixelhouse-meta-publishing
+  cancel-in-progress: false
+
+jobs:
+  marketing:
+    if: github.event_name == 'workflow_dispatch' || vars.AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install renderer
+        run: |
+          python -m pip install -r requirements.txt
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg fonts-dejavu-core
+          fi
+      - name: Generate or publish safely
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
+          AUTOMATION_ENABLED: ${{ vars.AUTOMATION_ENABLED }}
+          EVENT_NAME: ${{ github.event_name }}
+          CRON: ${{ github.event.schedule }}
+          INPUT_COMMAND: ${{ inputs.command }}
+          INPUT_KIND: ${{ inputs.kind }}
+          INPUT_SLOT: ${{ inputs.slot }}
+          INPUT_PLATFORM: ${{ inputs.platform }}
+          INPUT_RESOLUTION: ${{ inputs.resolution }}
+          INPUT_REMOTE_ID: ${{ inputs.remote_id }}
+        run: |
+          command="${INPUT_COMMAND:-preview}"
+          kind="${INPUT_KIND:-image}"
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            command=publish
+            if [ "$CRON" = "0 13 * * *" ]; then kind=video; fi
+          fi
+          python run.py "$command" --kind "$kind" \
+            --slot "${INPUT_SLOT:-}" --platform "${INPUT_PLATFORM:-facebook}" \
+            --resolution "${INPUT_RESOLUTION:-none}" --remote-id "${INPUT_REMOTE_ID:-}"
+      - name: Keep preview and caption for Android download
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pixelhouse-preview-${{ github.run_id }}
+          path: output/
+          if-no-files-found: ignore
+          retention-days: 3
