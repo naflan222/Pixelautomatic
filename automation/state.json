@@ -1,4 +1,35 @@
 {
   "version": 1,
-  "posts": {}
+  "posts": {
+    "2026-11-07-image": {
+      "headline": "Capture a fresh perspective.",
+      "hook": "Your next adventure starts here.",
+      "caption": "Capture a fresh perspective.\n50 in 1 Accessories Kit GoPro · LKR 8,000\nExplore at Pixelhouse: https://pixelhouse.lk/single-product.html?slug=single-product\n#Pixelhouse #PhotographySriLanka #CameraAccessories #GoProSriLanka",
+      "design_seed": 524432690,
+      "product": {
+        "id": "1",
+        "name": "50 in 1 Accessories Kit GoPro",
+        "price": 8000,
+        "stock": 20,
+        "image": "https://pixelhouse.lk/img/product/18.png",
+        "url": "https://pixelhouse.lk/single-product.html?slug=single-product",
+        "category": "GoPro Accessories",
+        "verified_at": "2026-11-06T20:47:33.603454+00:00"
+      },
+      "slot": "2026-11-07-image",
+      "date": "2026-11-07",
+      "kind": "image",
+      "created_at": "2026-11-06T20:47:33.603548+00:00",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
+    }
+  }
 }
