@@ -30,9 +30,10 @@
           "published_at": "2026-11-06T20:47:44.141214+00:00"
         },
         "instagram": {
-          "phase": "container_request",
+          "phase": "container_created",
           "status": "pending",
-          "updated_at": "2026-11-06T20:47:45.253577+00:00"
+          "updated_at": "2026-11-06T20:47:50.618311+00:00",
+          "container_id": "18108783143234268"
         }
       },
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/018a1622926c974811b9d157f1f43e09c2f6fa7e/automation/media/999bb435c8693ad3e6591b82d7d30eba3f5699eb0bd59ac85ed972be493389e0.jpg",
