@@ -9,7 +9,7 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-from pixelhouse.core import (AutomationError, GitHubStore, Meta, assert_current, due,
+from pixelhouse.core import (AutomationError, GitHubStore, Meta, assert_current, automation_enabled, due,
                              load_config, local_day, plan, products, select_product, utc_now)
 from pixelhouse.media import render_image, render_video
 from pixelhouse import publishing
@@ -135,8 +135,8 @@ def main(argv=None):
         raise AutomationError("Run initialize once first. A missing posting ledger must never silently reset history.")
     if not config.get("brand_approved") or not config.get("photo_rights_confirmed"):
         raise AutomationError("Review the logo and confirm photography rights in config.json before publishing.")
-    if os.getenv("AUTOMATION_ENABLED", "").lower() != "true":
-        raise AutomationError("Publishing is disabled. After preview and account checks, set the AUTOMATION_ENABLED repository variable to true.")
+    if not automation_enabled(config):
+        raise AutomationError("Publishing is disabled. Enable automation_enabled in config.json or the AUTOMATION_ENABLED repository variable after account checks.")
     meta = meta_from_env(config)
     meta.check(config["platforms"])
     if args.command == "reconcile":

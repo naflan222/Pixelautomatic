@@ -38,6 +38,17 @@ def due(kind, day, start):
     return elapsed >= 0 and (kind == "image" or elapsed % 3 == 0)
 
 
+def automation_enabled(config, override=None):
+    """The optional repository variable overrides the versioned on/off switch."""
+    value = os.getenv("AUTOMATION_ENABLED", "") if override is None else override
+    value = value.strip().lower()
+    if value:
+        if value not in ("true", "false"):
+            raise AutomationError("AUTOMATION_ENABLED must be true, false, or unset.")
+        return value == "true"
+    return config.get("automation_enabled", False) is True
+
+
 def load_config(path="config.json"):
     c = json.loads(Path(path).read_text())
     date.fromisoformat(c["start_date"])
@@ -55,6 +66,8 @@ def load_config(path="config.json"):
         raise AutomationError("State branch name must contain letters, numbers, _ or -.")
     if c.get("video_seconds") != 20:
         raise AutomationError("The validated fallback exports 20-second videos.")
+    if "automation_enabled" in c and type(c["automation_enabled"]) is not bool:
+        raise AutomationError("automation_enabled in config.json must be true or false.")
     return c
 
 

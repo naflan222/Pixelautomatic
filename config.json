@@ -2,13 +2,17 @@
   "brand": "Pixelhouse",
   "website": "https://pixelhouse.lk",
   "timezone": "Asia/Colombo",
-  "start_date": "2026-11-06",
+  "start_date": "2026-11-07",
   "language": "en",
-  "platforms": ["facebook", "instagram"],
-  "brand_approved": false,
-  "photo_rights_confirmed": false,
+  "platforms": [
+    "facebook",
+    "instagram"
+  ],
+  "brand_approved": true,
+  "photo_rights_confirmed": true,
   "excluded_product_ids": [],
   "graph_version": "v27.0",
   "state_branch": "automation-state",
-  "video_seconds": 20
+  "video_seconds": 20,
+  "automation_enabled": true
 }

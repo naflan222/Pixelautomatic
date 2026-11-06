@@ -4,7 +4,7 @@
 
 This repository runs short GitHub Actions jobs to import real Pixelhouse products, create branded product advertisements, and publish through official Meta APIs. Your phone can be switched off.
 
-**Status: publishing is disabled until you complete setup. No account has been connected by installing this code.**
+**Posting is controlled by `automation_enabled` in `config.json`. The owner enabled this repository after connecting Meta. Keep this setting `false` while setting up a new installation.**
 
 ## What it does
 
@@ -100,14 +100,11 @@ It verifies that the token belongs to your configured Facebook Page, that the co
 
 ### 8. Enable automation and publish your first real test
 
-Settings → Secrets and variables → Actions → **Variables** → New repository variable:
+Edit `config.json` and set `"automation_enabled": true`. This enables scheduled jobs **and** manual publishing. Set it only after previews, rights confirmation, account checks and the schedule are ready. You do not need to create a repository variable.
 
-```text
-Name: AUTOMATION_ENABLED
-Value: true
-```
+An existing `AUTOMATION_ENABLED` repository variable remains an optional override: `false` pauses publishing even when the config switch is true. Remove that variable to use the file switch exclusively. Invalid values stop the workflow safely.
 
-This enables scheduled jobs **and** manual publishing. Add it only after previews, rights confirmation, account checks and the schedule are ready. Then run workflow with command **`publish`**, kind **`image`**. This posts today's slot to the platforms selected in `config.json`. Verify the actual Facebook and Instagram posts and recorded links.
+The `automation/activate-first-post.json` marker records the owner-requested first image post. Adding/updating that file on `main` explicitly requests an image publication; the daily-slot ledger prevents reposting a completed slot. Ordinary config edits do not trigger publication. Then run workflow with command **`publish`**, kind **`image`**. This posts today's slot to the platforms selected in `config.json`. Verify the actual Facebook and Instagram posts and recorded links.
 
 A repeated publish run for the same date/kind skips completed platform posts. Video publishing occurs only on a configured video day; you can always preview video on any day. To test a real video today, set `start_date` to today's Colombo date before running publish/video.
 
@@ -119,8 +116,8 @@ For failure alerts, configure GitHub's Actions notification/email preferences. G
 
 ## Pause and recover
 
-- **Pause:** change repository variable `AUTOMATION_ENABLED` to `false`, or disable this workflow under Actions. An already-running publishing request may still finish. Pausing stops future jobs; it does not retract posts.
-- **Resume:** set the variable back to `true` after checking credentials and stock.
+- **Pause:** set `"automation_enabled": false` in `config.json`, set an optional `AUTOMATION_ENABLED` repository variable to `false`, or disable this workflow under Actions. An already-running publishing request may still finish. Pausing stops future jobs; it does not retract posts.
+- **Resume:** set the config switch to `true` after checking credentials and stock; remove or update any overriding repository variable.
 - **Processing / lost response:** run command `reconcile`. It reuses recorded Instagram containers/Facebook Reel IDs and never starts new daily slots. It can finish a previously prepared post only while its facts remain current and its draft is under 24 hours old.
 - **Uncertain photo/publish outcome:** inspect the real Page/profile first. Run `resolve` with the affected slot, platform, and `published` plus the real post ID, or `cancel`. Use `verified_absent` only after confirming that no post was published; it permits a later retry. Resolve itself does not post anything. Never delete state as a retry technique.
 - **Changed price/stock:** the workflow stops before publication. Review it; keep the stale slot held/cancelled rather than overriding factual checks. The next day selects from current inventory.
