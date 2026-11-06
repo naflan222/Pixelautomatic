@@ -11,6 +11,18 @@ class StateTests(unittest.TestCase):
     def make(self):
         return GitHubStore("owner/repository", "fixture-token", "automation-state")
 
+    def test_repository_metadata_url_has_no_trailing_slash(self):
+        store = self.make()
+        with patch("pixelhouse.core.json_request", return_value={"private": False}) as fetch:
+            store.api("")
+        self.assertEqual(fetch.call_args.args[0], "https://api.github.com/repos/owner/repository")
+
+    def test_nested_api_path_and_query_are_preserved(self):
+        store = self.make()
+        with patch("pixelhouse.core.json_request", return_value={}) as fetch:
+            store.api("contents/automation/state.json?ref=automation-state")
+        self.assertEqual(fetch.call_args.args[0], "https://api.github.com/repos/owner/repository/contents/automation/state.json?ref=automation-state")
+
     def test_private_media_repository_rejected(self):
         store = self.make()
         store.api = Mock(return_value={"private": True, "default_branch": "main"})

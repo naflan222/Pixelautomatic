@@ -219,7 +219,12 @@ class GitHubStore:
         self.state = {"version": 1, "posts": {}}
 
     def api(self, path, *, method="GET", body=None):
-        return json_request(f"https://api.github.com/repos/{self.repo}/{path}", method=method, headers=self.headers, body=body, service="GitHub", limit=50_000_000)
+        # GitHub returns 404 for repository metadata at /owner/repo/.
+        # Add the separator only when addressing a nested API resource.
+        url = f"https://api.github.com/repos/{self.repo}"
+        if path:
+            url += "/" + path.lstrip("/")
+        return json_request(url, method=method, headers=self.headers, body=body, service="GitHub", limit=50_000_000)
 
     def load(self):
         info = self.api("")

@@ -94,7 +94,7 @@ This creates `automation-state` and `automation/state.json`. It does not publish
 
 ### 7. Check the accounts without posting
 
-Run the same workflow with command **`check`**.
+Open Actions → **Check Meta connection** → **Run workflow**, keeping branch `main`. This dedicated check needs no command selection. Alternatively, run the marketing workflow with command **`check`**.
 
 It verifies that the token belongs to your configured Facebook Page, that the configured Instagram account is linked, and that live products are available. It does not prove all publishing permissions are approved; that requires a real test post.
 
