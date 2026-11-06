@@ -38,6 +38,8 @@ Do not add a credit card or buy a server for this setup. Public repositories on 
 
 ### 2. Generate a free preview first
 
+A successful **Tests** run on `main` also creates a `pixelhouse-initial-previews` artifact with an image and video, without using any social credentials. You can inspect that first, or generate a fresh preview below.
+
 Actions → **Pixelhouse Facebook + Instagram** → **Run workflow**:
 
 - Branch: `main`
