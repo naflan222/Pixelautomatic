@@ -13,6 +13,8 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from .captions import clean_description, professional_caption
+
 
 class AutomationError(Exception):
     """A safe, operator-readable error without credentials or request bodies."""
@@ -156,7 +158,7 @@ def products():
         result.append({"id": str(p["id"]), "name": str(p["name"])[:250], "price": price,
                        "stock": stock if type(stock) is int else None, "image": image,
                        "url": "https://pixelhouse.lk/single-product.html?slug=" + urllib.parse.quote(str(p["slug"]), safe=""),
-                       "category": str(p.get("category", "")), "verified_at": utc_now()})
+                       "category": str(p.get("category", "")), "description": clean_description(p.get("description", "")), "verified_at": utc_now()})
     if not result:
         raise AutomationError("The live catalog is empty. Holding publication.")
     return result
@@ -183,6 +185,8 @@ def assert_current(product, catalog):
     for field in ("price", "name", "image", "url"):
         if current[field] != product[field]:
             raise AutomationError(f"Product {field} changed after generation; create a fresh draft after review.")
+    if "description" in product and current.get("description", "") != product["description"]:
+        raise AutomationError("Product description changed after generation; create a fresh draft after review.")
     return current
 
 
@@ -192,24 +196,7 @@ HOOKS = ["Make every adventure count.", "Your next story starts here.", "Capture
 
 def plan(product, day, kind, language):
     index = int(hashlib.sha256(f"{day}:{kind}:{product['id']}".encode()).hexdigest()[:8], 16)
-    hook = HOOKS[index % len(HOOKS)]
-    price = "" if product["price"] is None else f" · LKR {product['price']:,.0f}"
-    if language == "si":
-        hook = "ඔබේ ඊළඟ නිර්මාණයට නව දැක්මක්."
-    elif language == "mixed":
-        hook = "ඔබේ next adventure එකට ready ද?"
-    category = product["category"].lower()
-    tags = ["#Pixelhouse", "#PhotographySriLanka", "#CameraAccessories"]
-    if "gopro" in category or "gopro" in product["name"].lower():
-        tags.append("#GoProSriLanka")
-    elif "osmo" in category or "dji" in product["name"].lower():
-        tags.append("#DJISriLanka")
-    else:
-        tags.append("#ContentCreator")
-    # Exact verified price is rendered without rounding away fractional values.
-    if product["price"] is not None and product["price"] % 1:
-        price = f" · LKR {product['price']:,.2f}"
-    caption = f"{hook}\n{product['name']}{price}\nExplore at Pixelhouse: {product['url']}\n{' '.join(tags)}"
+    caption = professional_caption(product, index, language)
     if len(caption) > 2200:
         raise AutomationError("Caption exceeds platform limit.")
     return {"headline": HOOKS[index % len(HOOKS)], "hook": "Your next adventure starts here.",
