@@ -248,11 +248,9 @@ def render_editorial(post, output, product_bytes=None, scene_image=None):
                 sd.line((0,y,1080,y),fill=(3,14,20,opacity))
             image=Image.alpha_composite(image.convert("RGBA"),shade).convert("RGB")
             logo(image);d=ImageDraw.Draw(image)
-            d.rounded_rectangle((730,45,1015,91),radius=14,fill=(15,31,35),outline=ACCENT,width=2)
-            d.text((750,55),"AI-GENERATED",font=font(22,True),fill=INK)
-            block(d,"Sri Lanka, imagined.",(65,height-400),940,160,54,bold=True)
+            block(d,post["destination"]["name"] + ", reimagined.",(65,height-400),940,160,54,bold=True)
             d.text((67,height-245),"Inspired by "+post["destination"]["name"],font=font(30),fill=INK)
-            block(d,"AI-generated travel inspiration; not a real location photograph.",(67,height-175),945,80,23,colour=INK)
+            block(d,"AI-generated travel concept. Not a location photograph.",(67,height-175),945,80,23,colour=INK)
             d.text((67,height-75),"pixelhouse.lk",font=font(30,True),fill=INK)
         else:
             image=canvas(height);logo(image);d=ImageDraw.Draw(image)
@@ -260,7 +258,7 @@ def render_editorial(post, output, product_bytes=None, scene_image=None):
             d.text((65,130),category,font=font(19,True),fill=ACCENT)
             block(d,post["lesson"]["title"],(60,175),960,145,52,bold=True)
             top=350
-            graphic_h=340 if height==1350 else 760
+            graphic_h=480 if height==1350 else 900
             if photo is not None:
                 panel=Image.new("RGBA",(960,graphic_h),(245,246,242,255))
                 product=ImageOps.contain(photo,(900,graphic_h-25))
@@ -269,8 +267,8 @@ def render_editorial(post, output, product_bytes=None, scene_image=None):
             else:
                 image.paste(diagram(post["lesson"]["diagram"],960,graphic_h,post["design_seed"]),(60,top))
             summary_top=top+graphic_h+30
-            summary_h=160 if height==1350 else 190
-            block(d,post["lesson"]["summary"],(65,summary_top),950,summary_h,28,colour=INK)
+            summary_h=20 if height==1350 else 50
+            # The full explanation belongs in the caption; artwork prioritises the visual.
             card_top=summary_top+summary_h+20
             card_h=210 if height==1350 else 265
             for i,(heading,text) in enumerate(post["lesson"]["cards"]):

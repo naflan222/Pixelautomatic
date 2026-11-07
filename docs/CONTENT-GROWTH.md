@@ -52,7 +52,7 @@ These are original, **conceptual**, simplified educational illustrations of a ge
 
 ## Publishing and AI disclosure
 
-All categories use the existing safe official publishing adapters and daily-slot duplicate protection. Instagram media creation includes its documented `is_ai_generated` self-disclosure field for generated scenes. Facebook Reels finish requests include the same documented disclosure field. Generated photos additionally carry prominent image/caption disclosure. No undocumented Facebook photo-label field is assumed.
+All categories use the existing safe official publishing adapters and daily-slot duplicate protection. Instagram media creation includes its documented `is_ai_generated` self-disclosure field for generated scenes. Facebook Reels finish requests include the same documented disclosure field. Generated photos carry a discreet image/caption disclosure; the large top badge has been removed. No undocumented Facebook photo-label field is assumed.
 
 Technical illustrations are labeled educational/conceptual rather than fake product demonstrations. No unlicensed music, testimonials, discounts, bestseller claims or current-trend claims are introduced.
 
@@ -67,3 +67,7 @@ The ordinary test workflow uses camera-tip and camera-explainer previews, so rou
 ## Operating limits
 
 Public GitHub runner and cache policies still apply. This uses no paid model API and configures no paid runner, but it is not unlimited GPU hosting. Watch Actions status and cache/storage use. A paused automation switch continues to block posting. Existing published slots are never reset just because the content mix changes; the new categories appear in upcoming scheduled slots.
+
+## Presentation update
+
+Educational artwork prioritises larger diagrams with three concise takeaway cards; full explanations stay in captions. Videos use five four-second chapters, readable teaching points and an end card, exported as 1080×1920 H.264 at 30 FPS. They remain motion graphics, not generated live-action video. Topic-specific discovery hashtags rotate without claims of current trends or guaranteed viral performance. Captions retain only pixelhouse.lk as their website.

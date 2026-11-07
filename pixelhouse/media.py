@@ -108,15 +108,50 @@ def render_video(post, output):
     hook = output / "hook.txt"
     hook.write_text(post["hook"], encoding="utf-8")
     destination = output / "reel.mp4"
-    # No music is downloaded or added. A generated silent AAC track is compatible with MP4 consumers.
-    filters = ("scale=1152:2048,zoompan=z='min(zoom+0.00012,1.065)':"
-               "x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=600:s=1080x1920:fps=30,"
-               f"drawtext=fontfile={FONT_BOLD}:textfile='{hook.as_posix()}':"
+    # Five readable chapters instead of enlarging a single poster for 20 seconds.
+    # Motion-graphics fallback, not simulated live action or a product demonstration.
+    from PIL import ImageFilter
+    base = Image.open(output / "vertical.jpg").convert("RGB")
+    lesson = post.get("lesson")
+    cards = lesson.get("cards", []) if lesson else []
+    product = post.get("product") or {}
+    chapters = list(cards[:3]) if cards else [
+        (product.get("name", "Your next creative setup"), "Explore the details before your next shoot."),
+        ("Choose with confidence", "Check your exact camera model and accessory compatibility."),
+        ("Create your next story", "Discover cameras and accessories with Pixelhouse."),
+    ]
+    frames = [output / "vertical.jpg"]
+    for index, (title, detail) in enumerate(chapters + [("Your next frame starts here.", "Explore more at pixelhouse.lk")]):
+        slide = base.filter(ImageFilter.GaussianBlur(36)).convert("RGBA")
+        slide = Image.alpha_composite(slide, Image.new("RGBA", slide.size, (4, 12, 18, 215))).convert("RGB")
+        draw = ImageDraw.Draw(slide)
+        draw.text((80, 160), "PIXELHOUSE / " + ("EXPLORE" if index == 3 else f"0{index + 1}"), font=font(26, True), fill=(237, 172, 96))
+        y = 640
+        lines, title_font, title_size = wrap(draw, title, 52, 920, max_lines=5)
+        for line in lines:
+            draw.text((80, y), line, font=title_font, fill="white")
+            y += title_size + 17
+        y += 40
+        lines, detail_font, detail_size = wrap(draw, detail, 32, 920, max_lines=8)
+        for line in lines:
+            draw.text((80, y), line, font=detail_font, fill=(212, 222, 226))
+            y += detail_size + 16
+        draw.text((80, 1710), "pixelhouse.lk", font=font(30, True), fill="white")
+        if post.get("ai_generated"):
+            draw.text((80, 1770), "AI-generated travel concept", font=font(22), fill=(182, 196, 204))
+        path = output / f"chapter-{index}.jpg"
+        slide.save(path, "JPEG", quality=94)
+        frames.append(path)
+    playlist = output / "chapters.txt"
+    # Generated basenames only; never interpolate user text into FFmpeg commands.
+    playlist.write_text("".join(f"file '{path.name}'\nduration 4\n" for path in frames) + f"file '{frames[-1].name}'\n")
+    filters = ("fps=30,scale=1080:1920,fade=t=in:st=0:d=0.3,fade=t=out:st=19.6:d=0.4,"
+               f"drawtext=fontfile={FONT_BOLD}:textfile='{hook.as_posix()}':expansion=none:"
                "fontcolor=white:fontsize=35:box=1:boxcolor=black@0.65:boxborderw=18:"
                "x=(w-tw)/2:y=150:enable='lt(t,2)'")
-    cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-loop", "1", "-i", str(output / "vertical.jpg"),
+    cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "concat", "-safe", "1", "-i", str(playlist),
            "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-vf", filters, "-t", "20", "-r", "30",
-           "-c:v", "libx264", "-threads", "2", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p",
+           "-c:v", "libx264", "-threads", "2", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
            "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "-shortest", str(destination)]
     try:
         subprocess.run(cmd, check=True, timeout=300, capture_output=True)

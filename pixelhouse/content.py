@@ -110,6 +110,15 @@ def editorial_caption(post, language="en"):
         footer = "Pixelhouse සමඟ ඡායාරූපකරණය ගැන තව දැනගන්න."
     elif language == "mixed":
         footer = "ඔබේ next shoot එකට තවත් camera tips — Pixelhouse."
+    discovery = {
+        "travel": ["#LandscapePhotography", "#TravelInspiration", "#VisitSriLanka"],
+        "camera_tip": ["#LearnPhotography", "#PhotographyTutorial", "#CreatorTips"],
+        "camera_explainer": ["#CameraSettings", "#LearnPhotography", "#PhotographyTutorial"],
+        "accessory_explainer": ["#CameraGear", "#Filmmaking", "#ContentCreation"],
+        "exploded_view": ["#HowItWorks", "#CameraTechnology", "#LearnPhotography"],
+    }[post["topic"]]
+    index = post.get("design_seed", 0) % len(discovery)
+    tags = " ".join(dict.fromkeys((tags + " " + discovery[index] + " " + discovery[(index + 1) % len(discovery)]).split()))
     lines.extend([footer + "\npixelhouse.lk", tags])
     return "\n\n".join(lines)
 

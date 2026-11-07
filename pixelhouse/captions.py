@@ -59,7 +59,7 @@ def source_summary(product):
     return text
 
 
-def hashtags(product):
+def hashtags(product, index=0):
     name = product["name"].casefold()
     category = product.get("category", "").casefold()
     text = name + " " + category
@@ -74,6 +74,8 @@ def hashtags(product):
     else:
         tags.append("#ContentCreator")
     tags.append("#PhotographySriLanka")
+    discovery = ["#Photography", "#Videography", "#ContentCreation", "#CameraGear"]
+    tags.extend([discovery[index % len(discovery)], discovery[(index + 1) % len(discovery)]])
     return " ".join(dict.fromkeys(tags))
 
 
@@ -116,5 +118,5 @@ def professional_caption(product, index, language):
     if price is not None:
         formatted = f"{price:,.2f}" if price % 1 else f"{price:,.0f}"
         paragraphs.append(f"{price_label}: LKR {formatted}")
-    paragraphs.extend([f"{cta}\npixelhouse.lk", brand, hashtags(product)])
+    paragraphs.extend([f"{cta}\npixelhouse.lk", brand, hashtags(product, index)])
     return "\n\n".join(paragraphs)
