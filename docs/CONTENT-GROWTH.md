@@ -75,3 +75,7 @@ Educational artwork prioritises larger diagrams with three concise takeaway card
 ## Shared studio renderer and sound
 
 All product, educational and accessory templates use shared layered studio lighting, texture and a rotating palette. Travel photos retain their full-bleed scene. Aperture and shutter lessons use richer original optical/light-trail illustrations; they remain conceptual rather than real camera test results. Video scenes retain sharp subject visuals, subtle frame movement, source branding, readable text and a closing screen. Every new video receives a seeded, original synthesized ambient instrumental score (pads, bass, soft percussion and plucks), faded in/out and exported as stereo AAC. No copyrighted recordings or trending songs are downloaded. This is a free motion-graphics renderer, not a cinematic live-action video generator, and visual quality still depends on source photographs. Existing published media is not changed.
+
+## Non-plain campaign backgrounds
+
+Images and video chapters now use visible optical bokeh, diagonal contour textures and a photographic subject backdrop. Educational layouts use a store-owned GoPro photograph as decoration, never as evidence for a model-specific diagram. Product layouts use their own product photograph; travel scenes retain their generated landscape. Foreground product photographs are unchanged. The bundled background photo and its source/rights metadata live in assets/camera-background.*. No external image-service request or paid generation is needed for this background layer.

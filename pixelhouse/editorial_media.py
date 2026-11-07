@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw, ImageOps, ImageStat
 
 from .core import AutomationError, store_image
 from .content import fallback_to_tip
-from .art_direction import studio_background, lens_visual, motion_visual
+from .art_direction import studio_background, lens_visual, motion_visual, campaign_background
 from .media import font, wrap
 
 INK = (230, 237, 232)
@@ -48,8 +48,8 @@ def block(draw, text, xy, width, height, size=28, colour=INK, bold=False):
     raise AutomationError("Educational copy does not fit legibly; hold it for review.")
 
 
-def canvas(height, seed=0):
-    return studio_background((1080,height),seed)
+def canvas(height, seed=0, photograph=None):
+    return campaign_background((1080,height),seed,photograph)
 
 
 def logo(image):
@@ -258,7 +258,7 @@ def render_editorial(post, output, product_bytes=None, scene_image=None):
             block(d,"AI-generated travel concept. Not a location photograph.",(67,height-175),945,80,23,colour=INK)
             d.text((67,height-75),"pixelhouse.lk",font=font(30,True),fill=INK)
         else:
-            image=canvas(height,post["design_seed"]);logo(image);d=ImageDraw.Draw(image)
+            image=canvas(height,post["design_seed"],photo);logo(image);d=ImageDraw.Draw(image)
             category={"camera_tip":"CREATOR ACADEMY / CAMERA TIP","camera_explainer":"CAMERA EXPLAINED","exploded_view":"CONCEPTUAL CAMERA ANATOMY","accessory_explainer":"ACCESSORY EXPLAINED"}[post["topic"]]
             d.text((65,130),category,font=font(19,True),fill=ACCENT)
             block(d,post["lesson"]["title"],(60,175),960,145,52,bold=True)

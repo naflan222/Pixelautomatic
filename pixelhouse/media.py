@@ -11,7 +11,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from .core import AutomationError, store_image
-from .art_direction import studio_background, lens_visual, motion_visual
+from .art_direction import studio_background, lens_visual, motion_visual, campaign_background
 from .soundtrack import create_soundtrack
 
 Image.MAX_IMAGE_PIXELS = 40_000_000
@@ -64,7 +64,7 @@ def render_image(post, output, product_bytes=None):
     theme = [(36, 92, 78), (34, 72, 104), (78, 57, 92), (89, 75, 42)][post["design_seed"] % 4]
     assets = {}
     for variant, height in (("feed", 1350), ("vertical", 1920)):
-        image = studio_background((1080,height),post["design_seed"])
+        image = campaign_background((1080,height),post["design_seed"],original)
         draw = ImageDraw.Draw(image)
         # Deterministic variation is tied to the date and product, not fabricated stock/promotions.
         offset = post["design_seed"] % 140
@@ -119,8 +119,13 @@ def render_video(post, output):
         ("Create your next story", "Discover cameras and accessories with Pixelhouse."),
     ]
     frames = [output / "vertical.jpg"]
+    background_photo = None
+    if product:
+        background_photo = base.crop((60,620,1020,1470)) if post.get("topic","product")=="product" else base.crop((60,350,1020,1110))
+    elif post.get("topic")=="travel":
+        background_photo = base.crop((0,140,1080,1300))
     for index, (title, detail) in enumerate(chapters + [("Your next frame starts here.", "Explore more at pixelhouse.lk")]):
-        slide = studio_background((1080,1920),post["design_seed"]+index)
+        slide = campaign_background((1080,1920),post["design_seed"]+index,background_photo)
         # Keep a crisp subject visual in every scene rather than blur the whole poster.
         if post.get("topic") in {"camera_tip","camera_explainer","exploded_view"}:
             from .editorial_media import diagram

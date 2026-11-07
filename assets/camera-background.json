@@ -1,0 +1,12 @@
+{
+  "source": "https://pixelhouse.lk/img/product/hero13.png",
+  "usage": "Decorative store-owned camera photograph, not a model-specific anatomy reference.",
+  "rights": "Business photography use confirmed in config.json.",
+  "crop_from_1000px_source": [
+    85,
+    300,
+    605,
+    715
+  ],
+  "crop_reason": "Isolate the photographed camera; exclude promotional wording, specifications and bundle graphics."
+}
