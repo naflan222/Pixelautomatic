@@ -93,10 +93,12 @@
           "last_error": "Facebook is still processing. Run reconcile to reuse the saved Reel ID."
         },
         "instagram": {
-          "phase": "publish_request",
-          "status": "pending",
-          "updated_at": "2026-11-07T18:05:35.180661+00:00",
-          "container_id": "18108959270234268"
+          "phase": "done",
+          "status": "published",
+          "updated_at": "2026-11-07T18:05:45.665402+00:00",
+          "container_id": "18108959270234268",
+          "remote_id": "18356360524219340",
+          "published_at": "2026-11-07T18:05:45.665384+00:00"
         }
       },
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
