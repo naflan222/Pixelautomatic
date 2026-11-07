@@ -41,6 +41,58 @@
       },
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/018a1622926c974811b9d157f1f43e09c2f6fa7e/automation/media/999bb435c8693ad3e6591b82d7d30eba3f5699eb0bd59ac85ed972be493389e0.jpg",
       "fingerprint": "999bb435c8693ad3e6591b82d7d30eba3f5699eb0bd59ac85ed972be493389e0"
+    },
+    "2026-11-07-video": {
+      "slot": "2026-11-07-video",
+      "date": "2026-11-07",
+      "kind": "video",
+      "topic": "camera_explainer",
+      "creative_id": "iso",
+      "headline": "What ISO really changes",
+      "hook": "What ISO really changes",
+      "design_seed": 548761314,
+      "product": null,
+      "lesson": {
+        "id": "iso",
+        "title": "What ISO really changes",
+        "summary": "At fixed aperture and shutter duration, increasing ISO usually brightens the rendered image. It does not add captured light. Noise depends on exposure and the camera's design and processing.",
+        "cards": [
+          [
+            "Captured light",
+            "Set by the scene, aperture and duration."
+          ],
+          [
+            "ISO setting",
+            "Influences gain and image rendering."
+          ],
+          [
+            "Practical choice",
+            "Balance exposure, motion and noise."
+          ]
+        ],
+        "diagram": "iso",
+        "sources": [
+          "https://www.cambridgeincolour.com/tutorials/camera-exposure.htm"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.cambridgeincolour.com/tutorials/camera-exposure.htm"
+      ],
+      "ai_generated": false,
+      "created_at": "2026-11-07T17:58:30.719846+00:00",
+      "language": "en",
+      "caption": "What ISO really changes\n\nAt fixed aperture and shutter duration, increasing ISO usually brightens the rendered image. It does not add captured light. Noise depends on exposure and the camera's design and processing.\n\n• Captured light: Set by the scene, aperture and duration.\n• ISO setting: Influences gain and image rendering.\n• Practical choice: Balance exposure, motion and noise.\n\nSimplified educational illustration; settings are examples, not universal recommendations.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #PhotographyTips #CameraExplained #PhotographySriLanka #CameraSettings #LearnPhotography",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
