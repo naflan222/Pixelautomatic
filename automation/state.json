@@ -86,10 +86,11 @@
       "publications": {
         "facebook": {
           "phase": "reel_uploaded",
-          "status": "pending",
-          "updated_at": "2026-11-07T17:58:51.852996+00:00",
+          "status": "held",
+          "updated_at": "2026-11-07T18:04:59.953782+00:00",
           "remote_id": "1493054226035030",
-          "upload_url": "https://rupload.facebook.com/video-upload/v27.0/1493054226035030"
+          "upload_url": "https://rupload.facebook.com/video-upload/v27.0/1493054226035030",
+          "last_error": "Facebook is still processing. Run reconcile to reuse the saved Reel ID."
         },
         "instagram": {
           "phase": "new",
