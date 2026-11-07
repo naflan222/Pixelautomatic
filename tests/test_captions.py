@@ -18,7 +18,9 @@ class CaptionTests(unittest.TestCase):
         caption = professional_caption(PRODUCT, 0, "en")
         self.assertIn(PRODUCT["description"], caption)
         self.assertIn("Price: LKR 8,000", caption)
-        self.assertIn(PRODUCT["url"], caption)
+        self.assertIn("\npixelhouse.lk\n", caption)
+        self.assertNotIn(PRODUCT["url"], caption)
+        self.assertNotIn("single-product.html", caption)
         self.assertNotIn("waterproof", caption.lower())
         self.assertNotIn("free shipping", caption.lower())
 
@@ -57,9 +59,15 @@ class CaptionTests(unittest.TestCase):
         with self.assertRaisesRegex(AutomationError, "description changed"):
             assert_current(PRODUCT, [{**PRODUCT, "description": "Updated compatibility restriction."}])
 
-    def test_oversize_caption_is_held_without_cutting_product_url(self):
-        with self.assertRaisesRegex(AutomationError, "Caption exceeds"):
-            plan({**PRODUCT, "url": "https://pixelhouse.lk/" + "x" * 2200}, date(2026, 11, 7), "image", "en")
+    def test_product_links_are_omitted_in_every_caption_language(self):
+        product = {**PRODUCT, "url": "https://pixelhouse.lk/" + "x" * 2200}
+        for language in ("en", "si", "mixed"):
+            with self.subTest(language=language):
+                caption = plan(product, date(2026, 11, 7), "image", language)["caption"]
+                self.assertIn("\npixelhouse.lk\n", caption)
+                self.assertNotIn(product["url"], caption)
+                self.assertNotIn("https://", caption)
+                self.assertLessEqual(len(caption), 2200)
 
 
 if __name__ == "__main__":

@@ -116,5 +116,5 @@ def professional_caption(product, index, language):
     if price is not None:
         formatted = f"{price:,.2f}" if price % 1 else f"{price:,.0f}"
         paragraphs.append(f"{price_label}: LKR {formatted}")
-    paragraphs.extend([f"{cta}\n{product['url']}", brand, hashtags(product)])
+    paragraphs.extend([f"{cta}\npixelhouse.lk", brand, hashtags(product)])
     return "\n\n".join(paragraphs)
