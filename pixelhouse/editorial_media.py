@@ -238,7 +238,7 @@ def render_editorial(post, output, product_bytes=None, scene_image=None):
         try:
             photo=ImageOps.exif_transpose(Image.open(io.BytesIO(raw))).convert("RGBA")
             photo.load()
-            if min(photo.size) < 160:
+            if min(photo.size) < 600:
                 raise AutomationError("Accessory photograph is too small for publishing.")
         except Exception:raise AutomationError("Accessory photograph could not be decoded.") from None
     result={}
@@ -266,7 +266,8 @@ def render_editorial(post, output, product_bytes=None, scene_image=None):
             graphic_h=480 if height==1350 else 900
             if photo is not None:
                 panel=Image.new("RGBA",(960,graphic_h),(245,246,242,255))
-                product=ImageOps.contain(photo,(900,graphic_h-25))
+                product=photo.copy()
+                product.thumbnail((900,graphic_h-25),Image.Resampling.LANCZOS)
                 panel.alpha_composite(product,((960-product.width)//2,(graphic_h-product.height)//2))
                 image.paste(panel.convert("RGB"),(60,top))
             else:

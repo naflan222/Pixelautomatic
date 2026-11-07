@@ -192,7 +192,7 @@ class PublisherTests(unittest.TestCase):
 
     def test_media_renders_jpeg_with_platform_dimensions(self):
         source = io.BytesIO()
-        Image.new("RGB", (500, 500), "gray").save(source, "PNG")
+        Image.new("RGB", (800, 800), "gray").save(source, "PNG")
         post, _, _ = fixture()
         with TemporaryDirectory() as temp:
             result = render_image(post, temp, source.getvalue())

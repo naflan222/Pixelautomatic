@@ -89,44 +89,17 @@ def motion_visual(size, blurred=False, seed=0):
 
 
 def campaign_background(size, seed=0, photograph=None):
-    """Visible optical bokeh, contour lines and a real source-photo backdrop."""
-    import base64
-    import io
-    from pathlib import Path
-    from PIL import ImageOps, ImageEnhance, ImageChops
+    """Use an independently generated studio scene; never enlarge store posters."""
+    from .backgrounds import generated_background
+    image=generated_background(size,seed)
+    if image is None:
+        # Crisp original optical artwork is an honest fallback if the library is absent.
+        image=studio_background(size,seed)
     width,height=size
-    image=studio_background(size,seed).convert('RGBA')
-    rng=random.Random(seed)
-    atmosphere=Image.new('RGBA',size)
-    draw=ImageDraw.Draw(atmosphere)
-    # Large out-of-focus highlights occupy the composition rather than a flat gradient.
-    for i in range(28):
-        x=rng.randint(-60,width+60);y=rng.randint(-60,height+60)
-        radius=rng.randint(16,90)
-        colour=(65,165,189,46) if i%2 else (239,159,71,40)
-        draw.ellipse((x-radius,y-radius,x+radius,y+radius),fill=colour,outline=colour[:3]+(100,),width=2)
-    image=Image.alpha_composite(image,atmosphere.filter(ImageFilter.GaussianBlur(9)))
-    lines=Image.new('RGBA',size);draw=ImageDraw.Draw(lines)
-    for offset in range(0,width*2,95):
-        draw.line((offset-width,height,offset+width,0),fill=(130,193,205,21),width=2)
-    image=Image.alpha_composite(image,lines)
-    if photograph is None:
-        path=Path('assets/camera-background.b64')
-        if path.exists():photograph=Image.open(io.BytesIO(base64.b64decode(path.read_text()))).convert('RGBA')
-    if photograph is not None:
-        subject=photograph.convert('RGBA')
-        # A white store-photo background is masked only for the decorative backdrop.
-        # The actual advertised foreground photograph remains unchanged.
-        white=ImageChops.darker(ImageChops.darker(subject.getchannel('R'),subject.getchannel('G')),subject.getchannel('B'))
-        mask=ImageOps.invert(white).point(lambda v: min(255,v*3))
-        mask=ImageChops.multiply(mask,subject.getchannel('A'))
-        subject=ImageEnhance.Brightness(subject).enhance(1.55)
-        subject.putalpha(mask.point(lambda v:int(v*.42)))
-        subject=ImageOps.contain(subject,(int(width*1.18),int(height*.73)))
-        image.alpha_composite(subject,(int(width*.27),int(height*.02)))
-    # Maintain contrast in the main text zones while leaving the scene plainly visible.
-    scrim=Image.new('RGBA',size);d=ImageDraw.Draw(scrim)
+    overlay=Image.new('RGBA',size)
+    d=ImageDraw.Draw(overlay)
+    # Local contrast only; do not blur or wash out the generated camera detail.
     for y in range(height):
-        alpha=int(65*(1-y/height)) if y<height*.28 else int(65*max(0,(y/height-.63)/.37))
-        d.line((0,y,width,y),fill=(3,10,16,alpha))
-    return Image.alpha_composite(image,scrim).convert('RGB')
+        alpha=100 if y<height*.25 else 125 if y>height*.62 else 20
+        d.line((0,y,width,y),fill=(2,9,15,alpha))
+    return Image.alpha_composite(image.convert('RGBA'),overlay).convert('RGB')

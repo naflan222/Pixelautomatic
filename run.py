@@ -27,6 +27,11 @@ def summary(text):
 def render(post, output_base="output"):
     output = Path(output_base) / post["slot"]
     output.mkdir(parents=True, exist_ok=True)
+    if post.get("topic") != "travel" and list(Path("assets/backgrounds").glob("*.b64")):
+        post["ai_generated"] = True
+        post["background_provenance"] = "Independently generated generic camera studio; not the advertised product."
+        if "AI-generated" not in post["caption"]:
+            post["caption"] += "\n\nAI-generated studio background; product photographs and educational diagrams remain separate."
     assets = render_image(post, output)
     if post.get("fallback_reason"):
         summary("Content fallback: " + post["fallback_reason"])

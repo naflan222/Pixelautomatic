@@ -58,7 +58,7 @@ def render_image(post, output, product_bytes=None):
         original = ImageOps.exif_transpose(original).convert("RGBA")
     except Exception:
         raise AutomationError("Original product photograph could not be decoded.") from None
-    if min(original.size) < 160:
+    if min(original.size) < 600:
         raise AutomationError("Source product photo is too small. Supply a better original before publishing.")
     logo = Image.open(io.BytesIO(base64.b64decode(Path("assets/logo.b64").read_text()))).convert("RGBA")
     theme = [(36, 92, 78), (34, 72, 104), (78, 57, 92), (89, 75, 42)][post["design_seed"] % 4]
@@ -78,7 +78,8 @@ def render_image(post, output, product_bytes=None):
             draw.text((70, 210 + index * (size + 12)), line, font=title_font, fill=(247, 246, 232))
         top = 465 if height == 1350 else 620
         box_height = 500 if height == 1350 else 850
-        product = ImageOps.contain(original, (900, box_height))
+        product = original.copy()
+        product.thumbnail((900, box_height), Image.Resampling.LANCZOS)
         x, y = (1080-product.width)//2, top + (box_height-product.height)//2
         image.paste(product, (x, y), product)
         price = post["product"]["price"]
@@ -166,7 +167,7 @@ def render_video(post, output):
     playlist.write_text("".join(f"file '{path.name}'\nduration 4\n" for path in frames) + f"file '{frames[-1].name}'\n")
     music = create_soundtrack(output / "original-score.wav",post["design_seed"])
     post["audio_provenance"]={"source":"Pixelhouse original procedural composition","copyrighted_recordings":False,"seed":post["design_seed"]}
-    filters = ("fps=30,scale=1124:2000,zoompan=z='1+0.018*sin(on/60)':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,fade=t=in:st=0:d=0.3,fade=t=out:st=19.6:d=0.4,"
+    filters = ("fps=30,scale=1080:1920:flags=lanczos,setsar=1,fade=t=in:st=0:d=0.3,fade=t=out:st=19.6:d=0.4,"
                f"drawtext=fontfile={FONT_BOLD}:textfile='{hook.as_posix()}':expansion=none:"
                "fontcolor=white:fontsize=35:box=1:boxcolor=black@0.65:boxborderw=18:"
                "x=(w-tw)/2:y=150:enable='lt(t,2)'")

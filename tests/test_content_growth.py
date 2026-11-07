@@ -97,7 +97,7 @@ class GrowthPlanningTests(unittest.TestCase):
 
 class GrowthMediaTests(unittest.TestCase):
     def test_all_editorial_types_render_feed_and_vertical_jpegs(self):
-        source=io.BytesIO();Image.new("RGB",(500,500),"gray").save(source,"PNG")
+        source=io.BytesIO();Image.new("RGB",(800,800),"gray").save(source,"PNG")
         for topic in ("camera_tip","camera_explainer","exploded_view","travel","accessory_explainer"):
             with self.subTest(topic=topic), TemporaryDirectory() as temp, patch("pixelhouse.content.products",return_value=[PRODUCT]):
                 p=build_plan(CONFIG,EMPTY,DAY,"image",topic)
