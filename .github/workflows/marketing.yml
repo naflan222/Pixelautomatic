@@ -105,6 +105,7 @@ jobs:
           path: ~/.cache/huggingface
           key: pixelhouse-absolutereality-569d201654dca1426f1e090fca3953acc7db2c30-v1
       - name: Install free CPU image generation
+        continue-on-error: true
         if: steps.gate.outputs.needs_ai == 'true'
         run: python -m pip install -r requirements-ai.txt
       - name: Install renderer
