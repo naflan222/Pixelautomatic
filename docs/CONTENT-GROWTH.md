@@ -71,3 +71,7 @@ Public GitHub runner and cache policies still apply. This uses no paid model API
 ## Presentation update
 
 Educational artwork prioritises larger diagrams with three concise takeaway cards; full explanations stay in captions. Videos use five four-second chapters, readable teaching points and an end card, exported as 1080×1920 H.264 at 30 FPS. They remain motion graphics, not generated live-action video. Topic-specific discovery hashtags rotate without claims of current trends or guaranteed viral performance. Captions retain only pixelhouse.lk as their website.
+
+## Shared studio renderer and sound
+
+All product, educational and accessory templates use shared layered studio lighting, texture and a rotating palette. Travel photos retain their full-bleed scene. Aperture and shutter lessons use richer original optical/light-trail illustrations; they remain conceptual rather than real camera test results. Video scenes retain sharp subject visuals, subtle frame movement, source branding, readable text and a closing screen. Every new video receives a seeded, original synthesized ambient instrumental score (pads, bass, soft percussion and plucks), faded in/out and exported as stereo AAC. No copyrighted recordings or trending songs are downloaded. This is a free motion-graphics renderer, not a cinematic live-action video generator, and visual quality still depends on source photographs. Existing published media is not changed.

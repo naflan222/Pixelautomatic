@@ -11,6 +11,8 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from .core import AutomationError, store_image
+from .art_direction import studio_background, lens_visual, motion_visual
+from .soundtrack import create_soundtrack
 
 Image.MAX_IMAGE_PIXELS = 40_000_000
 FONT_REGULAR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
@@ -62,12 +64,8 @@ def render_image(post, output, product_bytes=None):
     theme = [(36, 92, 78), (34, 72, 104), (78, 57, 92), (89, 75, 42)][post["design_seed"] % 4]
     assets = {}
     for variant, height in (("feed", 1350), ("vertical", 1920)):
-        image = Image.new("RGB", (1080, height))
+        image = studio_background((1080,height),post["design_seed"])
         draw = ImageDraw.Draw(image)
-        for y in range(height):
-            ratio = math.sin(math.pi * y / height) * 0.6
-            color = tuple(int(10 + v * ratio) for v in theme)
-            draw.line((0, y, 1080, y), fill=color)
         # Deterministic variation is tied to the date and product, not fabricated stock/promotions.
         offset = post["design_seed"] % 140
         for radius in (330, 420, 510):
@@ -122,17 +120,33 @@ def render_video(post, output):
     ]
     frames = [output / "vertical.jpg"]
     for index, (title, detail) in enumerate(chapters + [("Your next frame starts here.", "Explore more at pixelhouse.lk")]):
-        slide = base.filter(ImageFilter.GaussianBlur(36)).convert("RGBA")
-        slide = Image.alpha_composite(slide, Image.new("RGBA", slide.size, (4, 12, 18, 215))).convert("RGB")
+        slide = studio_background((1080,1920),post["design_seed"]+index)
+        # Keep a crisp subject visual in every scene rather than blur the whole poster.
+        if post.get("topic") in {"camera_tip","camera_explainer","exploded_view"}:
+            from .editorial_media import diagram
+            if lesson["diagram"]=="shutter" and index<2:
+                visual=motion_visual((960,760),bool(index),post["design_seed"])
+            elif lesson["diagram"]=="aperture" and index<2:
+                visual=lens_visual((960,760),post["design_seed"],.70 if index==0 else .22)
+            else:
+                visual=diagram(lesson["diagram"],960,760,post["design_seed"]+index)
+        else:
+            # The source composition retains the actual product or landscape, without inventing footage.
+            visual=base.crop((60,350,1020,1300)).resize((960,760),Image.Resampling.LANCZOS)
+        slide.paste(visual,(60,370))
+        from .editorial_media import logo
+        logo(slide)
         draw = ImageDraw.Draw(slide)
         draw.text((80, 160), "PIXELHOUSE / " + ("EXPLORE" if index == 3 else f"0{index + 1}"), font=font(26, True), fill=(237, 172, 96))
-        y = 640
-        lines, title_font, title_size = wrap(draw, title, 52, 920, max_lines=5)
+        y = 1210
+        lines, title_font, title_size = wrap(draw, title, 52, 920, max_lines=3)
         for line in lines:
             draw.text((80, y), line, font=title_font, fill="white")
             y += title_size + 17
         y += 40
-        lines, detail_font, detail_size = wrap(draw, detail, 32, 920, max_lines=8)
+        lines, detail_font, detail_size = wrap(draw, detail, 32, 920, max_lines=4)
+        if y + len(lines)*(detail_size+16) > 1650:
+            raise AutomationError("Video text exceeds the readable safe area; hold for review.")
         for line in lines:
             draw.text((80, y), line, font=detail_font, fill=(212, 222, 226))
             y += detail_size + 16
@@ -145,12 +159,14 @@ def render_video(post, output):
     playlist = output / "chapters.txt"
     # Generated basenames only; never interpolate user text into FFmpeg commands.
     playlist.write_text("".join(f"file '{path.name}'\nduration 4\n" for path in frames) + f"file '{frames[-1].name}'\n")
-    filters = ("fps=30,scale=1080:1920,fade=t=in:st=0:d=0.3,fade=t=out:st=19.6:d=0.4,"
+    music = create_soundtrack(output / "original-score.wav",post["design_seed"])
+    post["audio_provenance"]={"source":"Pixelhouse original procedural composition","copyrighted_recordings":False,"seed":post["design_seed"]}
+    filters = ("fps=30,scale=1124:2000,zoompan=z='1+0.018*sin(on/60)':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,fade=t=in:st=0:d=0.3,fade=t=out:st=19.6:d=0.4,"
                f"drawtext=fontfile={FONT_BOLD}:textfile='{hook.as_posix()}':expansion=none:"
                "fontcolor=white:fontsize=35:box=1:boxcolor=black@0.65:boxborderw=18:"
                "x=(w-tw)/2:y=150:enable='lt(t,2)'")
     cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "concat", "-safe", "1", "-i", str(playlist),
-           "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo", "-vf", filters, "-t", "20", "-r", "30",
+           "-i", str(music), "-vf", filters, "-t", "20", "-r", "30",
            "-c:v", "libx264", "-threads", "2", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p",
            "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "-shortest", str(destination)]
     try:
@@ -158,6 +174,9 @@ def render_video(post, output):
         result = subprocess.run(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(destination)], check=True, capture_output=True, timeout=30)
         info = json.loads(result.stdout)
         stream = next(s for s in info["streams"] if s["codec_type"] == "video")
+        audio = next(s for s in info["streams"] if s["codec_type"] == "audio")
+        if audio["codec_name"] != "aac" or int(audio["channels"]) != 2:
+            raise AutomationError("Video soundtrack export failed validation.")
         if stream["codec_name"] != "h264" or (stream["width"], stream["height"]) != (1080, 1920) or stream["r_frame_rate"] != "30/1" or not 19.9 <= float(info["format"]["duration"]) <= 20.1:
             raise AutomationError("Video export failed validation.")
     except (subprocess.SubprocessError, OSError, StopIteration, ValueError, KeyError):

@@ -16,6 +16,7 @@ from PIL import Image, ImageDraw, ImageOps, ImageStat
 
 from .core import AutomationError, store_image
 from .content import fallback_to_tip
+from .art_direction import studio_background, lens_visual, motion_visual
 from .media import font, wrap
 
 INK = (230, 237, 232)
@@ -47,13 +48,8 @@ def block(draw, text, xy, width, height, size=28, colour=INK, bold=False):
     raise AutomationError("Educational copy does not fit legibly; hold it for review.")
 
 
-def canvas(height):
-    image = Image.new("RGB", (1080, height))
-    draw = ImageDraw.Draw(image)
-    for y in range(height):
-        ratio = y / height
-        draw.line((0, y, 1080, y), fill=(int(12+9*ratio), int(24+14*ratio), int(31+13*ratio)))
-    return image
+def canvas(height, seed=0):
+    return studio_background((1080,height),seed)
 
 
 def logo(image):
@@ -71,10 +67,19 @@ def arrow(draw, start, end, colour=TEAL, width=4):
 
 
 def diagram(kind, width, height, seed):
-    image = Image.new("RGB", (width, height), (17, 36, 45))
+    image = studio_background((width,height),seed)
     d = ImageDraw.Draw(image)
     d.rounded_rectangle((2, 2, width-3, height-3), radius=22, outline=(44, 76, 83), width=2)
     cx, cy = width//2, height//2
+    if kind in {"shutter", "aperture"}:
+        gap=20; panel_w=(width-60)//2
+        for i in range(2):
+            x=20+i*(panel_w+gap)
+            panel=motion_visual((panel_w,height-65),bool(i),seed) if kind=="shutter" else lens_visual((panel_w,height-65),seed,.70 if i==0 else .22)
+            image.paste(panel,(x,10))
+            label=("FREEZE THE ACTION" if i==0 else "CREATE LIGHT TRAILS") if kind=="shutter" else ("WIDE APERTURE" if i==0 else "SMALL APERTURE")
+            d.text((x+10,height-43),label,font=font(18,True),fill=INK)
+        return image
     if kind == "exploded":
         # Functional components are separated for teaching, not reverse-engineered parts.
         labels = ["LENS", "APERTURE", "SHUTTER*", "SENSOR", "PROCESSOR", "DISPLAY"]
@@ -253,7 +258,7 @@ def render_editorial(post, output, product_bytes=None, scene_image=None):
             block(d,"AI-generated travel concept. Not a location photograph.",(67,height-175),945,80,23,colour=INK)
             d.text((67,height-75),"pixelhouse.lk",font=font(30,True),fill=INK)
         else:
-            image=canvas(height);logo(image);d=ImageDraw.Draw(image)
+            image=canvas(height,post["design_seed"]);logo(image);d=ImageDraw.Draw(image)
             category={"camera_tip":"CREATOR ACADEMY / CAMERA TIP","camera_explainer":"CAMERA EXPLAINED","exploded_view":"CONCEPTUAL CAMERA ANATOMY","accessory_explainer":"ACCESSORY EXPLAINED"}[post["topic"]]
             d.text((65,130),category,font=font(19,True),fill=ACCENT)
             block(d,post["lesson"]["title"],(60,175),960,145,52,bold=True)

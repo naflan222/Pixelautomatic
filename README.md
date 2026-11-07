@@ -16,7 +16,7 @@ This repository runs short GitHub Actions jobs to create a varied mix of product
 | Prices | Uses actual numeric LKR price; omits unknown prices; no invented discounts or bestseller claims |
 | Product rotation | Avoids the last seven products where stock allows; oldest-use preference |
 | Images | JPEG, 1080×1350 feed and 1080×1920 preview |
-| Videos | MP4, H.264, 1080×1920, 30fps, 20s, branded; generated silent AAC track, no copyrighted music |
+| Videos | MP4, H.264, 1080×1920, 30fps, 20s, branded; original generated instrumental score, stereo AAC, no downloaded music |
 | Platforms | Facebook Page photos + Reels, linked Instagram professional feed + Reels |
 | History | Durable JSON checkpoints in the `automation-state` branch |
 | Media | Opaque content-addressed public raw GitHub files on that branch, verified before Meta submission |
