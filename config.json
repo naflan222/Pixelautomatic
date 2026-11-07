@@ -14,5 +14,18 @@
   "graph_version": "v27.0",
   "state_branch": "automation-state",
   "video_seconds": 20,
-  "automation_enabled": true
+  "automation_enabled": true,
+  "content_rotation": [
+    "product",
+    "camera_tip",
+    "travel",
+    "camera_explainer",
+    "accessory_explainer",
+    "exploded_view",
+    "product"
+  ],
+  "ai_image": {
+    "provider": "local_cpu",
+    "timeout_seconds": 900
+  }
 }

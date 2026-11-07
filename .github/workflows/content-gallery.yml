@@ -1,0 +1,44 @@
+name: Preview varied content gallery
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/request-content-preview.json'
+permissions:
+  contents: read
+concurrency:
+  group: pixelhouse-content-gallery
+  cancel-in-progress: false
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-ai.txt
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/huggingface
+          key: pixelhouse-absolutereality-569d201654dca1426f1e090fca3953acc7db2c30-v1
+      - name: Install free image tools
+        run: python -m pip install -r requirements.txt -r requirements-ai.txt
+      - name: Generate six read-only examples
+        env:
+          HF_HUB_DISABLE_XET: 1
+          HF_HUB_DISABLE_PROGRESS_BARS: 1
+        run: python scripts/preview_gallery.py
+      - name: Downloadable gallery
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pixelhouse-varied-content-gallery
+          path: output/gallery/
+          retention-days: 5
+          if-no-files-found: ignore

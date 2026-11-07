@@ -2,7 +2,7 @@
 
 **No paid server. No database subscription. No paid AI API. No MacroDroid required.**
 
-This repository runs short GitHub Actions jobs to import real Pixelhouse products, create branded product advertisements, and publish through official Meta APIs. Your phone can be switched off.
+This repository runs short GitHub Actions jobs to create a varied mix of product ads, camera tips, camera/accessory explanations, disclosed Sri Lankan AI scenes and conceptual exploded views, then publish through official Meta APIs. Your phone can be switched off.
 
 **Posting is controlled by `automation_enabled` in `config.json`. The owner enabled this repository after connecting Meta. Keep this setting `false` while setting up a new installation.**
 
@@ -10,7 +10,7 @@ This repository runs short GitHub Actions jobs to import real Pixelhouse product
 
 | Task | Schedule / behavior |
 |---|---|
-| Product photograph advertisement | Every day around **08:30 Asia/Colombo** |
+| Daily image: rotating products, tips, explanations, travel and conceptual diagrams | Every day around **08:30 Asia/Colombo** |
 | 20-second branded motion video / Reels | Every **three calendar days** around **18:30 Asia/Colombo**, beginning on `start_date` |
 | Product facts | Fresh `https://pixelhouse.lk/api/products`; only verified positive stock |
 | Prices | Uses actual numeric LKR price; omits unknown prices; no invented discounts or bestseller claims |
@@ -22,7 +22,7 @@ This repository runs short GitHub Actions jobs to import real Pixelhouse product
 | Media | Opaque content-addressed public raw GitHub files on that branch, verified before Meta submission |
 | Languages | English, Sinhala, mixed Sinhala-English caption templates |
 
-These are genuine-photo compositions and motion graphics, **not generative-AI cinematic scenes**. They preserve the supplied product photograph. The storefront's custom API has been checked; WooCommerce is not assumed. Zero/unknown stock is excluded. Original photographs with embedded artwork retain that artwork; the system does not invent missing product imagery or capabilities.
+Product ads use genuine-photo compositions. Educational posts use original labeled illustrations; travel posts use a free CPU AI model with visible disclosure. Videos animate these assets rather than inventing real footage. See **[the content growth guide](docs/CONTENT-GROWTH.md)** for the rotation, free model, disclosures and fallback behavior. They preserve the supplied product photograph. The storefront's custom API has been checked; WooCommerce is not assumed. Zero/unknown stock is excluded. Original photographs with embedded artwork retain that artwork; the system does not invent missing product imagery or capabilities.
 
 These files are ready for the repository root. If copying the standalone package into another empty repository, see [Android installation](docs/INSTALL-FROM-ANDROID.md).
 
@@ -128,10 +128,10 @@ No automatic retry replays a possibly successful photo/final-publication request
 
 ## Costs and practical limits
 
-- No paid image/video AI, database, hosting subscription, or advertising spend is configured. This does not buy Facebook/Instagram ads; it publishes organic posts.
+- No paid image/video AI API, database, hosting subscription, or advertising spend is configured. Optional landscape generation runs a pinned public model on the free runner CPU. This does not buy Facebook/Instagram ads; it publishes organic posts.
 - GitHub's current free-runner, storage, fair-use and inactivity policies apply. Public scheduled workflows can be disabled after extended repository inactivity; watch GitHub's notifications and re-enable as needed. This is not a paid 24/7 uptime guarantee.
 - Generated marketing files and posting records are **public** on the state branch. Tokens are not written there. Do not use private images/customer data. The sample video is about 1–2 MB; git history accumulates media over time. Monitor repository size and migrate media/history storage if necessary; deleting files does not remove their old git blobs.
-- No trend feed, paid AI creativity, sales analytics, guaranteed follower growth, dashboard server, multi-user approval UI, TikTok, or WhatsApp is included in this focused free edition.
+- No live trend feed, paid generation API, sales analytics, guaranteed follower growth, dashboard server, multi-user approval UI, TikTok, or WhatsApp is included in this focused free edition.
 - Professional caption templates use a short introduction, the complete short product description from the store when suitable, a separate verified price, the homepage address `pixelhouse.lk` without individual product links, and relevant hashtags. HTML is cleaned; overly long descriptions and promotional claims needing separate verification are omitted rather than truncated. Description changes hold unpublished drafts. Template captions avoid unverified features, prices, offers and testimonials. Review your initial samples for spelling, source-image quality and brand suitability before enabling automation.
 - Actions are pinned to upstream commit IDs. Dependencies are pinned. Updates should be reviewed and tested before changing them.
 
@@ -144,6 +144,8 @@ python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
 python run.py preview --local --kind image
 python run.py preview --local --kind video
+python run.py preview --local --kind image --topic camera_tip
+python run.py preview --local --kind image --topic exploded_view
 ```
 
-Local preview makes live read-only requests to Pixelhouse but needs no social token or GitHub token. Unit tests use synthetic fixtures and mocked platform responses; no live posts are made. Never use actual tokens in test fixtures. Live social publishing has to be tested after your authorization.
+Product/accessory preview makes live read-only requests to Pixelhouse but needs no social token or GitHub token. Other educational topics do not depend on the store API. Travel generation requires `requirements-ai.txt`; see the content growth guide. Unit tests use synthetic fixtures and mocked platform responses; no live posts are made. Never use actual tokens in test fixtures. Live social publishing has to be tested after your authorization.

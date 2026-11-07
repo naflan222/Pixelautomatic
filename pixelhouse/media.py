@@ -44,6 +44,9 @@ def wrap(draw, text, size, width, max_lines=4):
 
 
 def render_image(post, output, product_bytes=None):
+    if post.get("topic", "product") != "product":
+        from .editorial_media import render_editorial
+        return render_editorial(post, output, product_bytes)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     raw = product_bytes if product_bytes is not None else store_image(post["product"]["image"])

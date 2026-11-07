@@ -24,6 +24,8 @@ def instagram(post, record, meta, store, validate, *, poll_seconds=15, max_polls
         validate()
         checkpoint(store, record, "container_request", status="pending")
         body = {"caption": post["caption"]}
+        if post.get("ai_generated"):
+            body["is_ai_generated"] = True
         if post["kind"] == "image":
             body["image_url"] = post["media_url"]
         else:
@@ -118,7 +120,7 @@ def facebook(post, record, meta, store, validate, *, poll_seconds=15, max_polls=
         if record["phase"] == "reel_uploaded" and ready:
             validate()
             checkpoint(store, record, "reel_finish_request")
-            meta.call(f"{meta.page_id}/video_reels", {"upload_phase": "finish", "video_id": record["remote_id"], "video_state": "PUBLISHED", "description": post["caption"], "is_ai_generated": False})
+            meta.call(f"{meta.page_id}/video_reels", {"upload_phase": "finish", "video_id": record["remote_id"], "video_state": "PUBLISHED", "description": post["caption"], "is_ai_generated": bool(post.get("ai_generated", False))})
             checkpoint(store, record, "reel_submitted")
         time.sleep(poll_seconds)
     raise AutomationError("Facebook is still processing. Run reconcile to reuse the saved Reel ID.")

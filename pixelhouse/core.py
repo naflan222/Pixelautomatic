@@ -70,6 +70,12 @@ def load_config(path="config.json"):
         raise AutomationError("The validated fallback exports 20-second videos.")
     if "automation_enabled" in c and type(c["automation_enabled"]) is not bool:
         raise AutomationError("automation_enabled in config.json must be true or false.")
+    if "content_rotation" in c:
+        valid_topics = {"product", "camera_tip", "travel", "camera_explainer", "accessory_explainer", "exploded_view"}
+        if not isinstance(c["content_rotation"], list) or not c["content_rotation"] or any(t not in valid_topics for t in c["content_rotation"]):
+            raise AutomationError("content_rotation must be a non-empty list of supported topics.")
+    if c.get("ai_image", {}).get("provider", "disabled") not in {"local_cpu", "disabled"}:
+        raise AutomationError("Only the free local_cpu image provider or disabled is supported.")
     return c
 
 

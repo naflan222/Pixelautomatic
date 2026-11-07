@@ -13,6 +13,7 @@ from pixelhouse.core import (AutomationError, GitHubStore, Meta, assert_current,
                              load_config, local_day, plan, products, select_product, utc_now)
 from pixelhouse.media import render_image, render_video
 from pixelhouse import publishing
+from pixelhouse.content import build_plan, editorial_caption, TOPICS
 
 
 def summary(text):
@@ -23,10 +24,12 @@ def summary(text):
             out.write(text + "\n\n")
 
 
-def render(post):
-    output = Path("output") / post["slot"]
+def render(post, output_base="output"):
+    output = Path(output_base) / post["slot"]
     output.mkdir(parents=True, exist_ok=True)
     assets = render_image(post, output)
+    if post.get("fallback_reason"):
+        summary("Content fallback: " + post["fallback_reason"])
     file = render_video(post, output) if post["kind"] == "video" else assets["feed"]
     manifest = {**post, "local_media": str(file), "fingerprint": assets["fingerprint"]}
     (output / "preview.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -42,7 +45,14 @@ def meta_from_env(config):
 def validate_before_publish(post):
     if (datetime.now(timezone.utc) - datetime.fromisoformat(post["created_at"])).total_seconds() > 86400:
         raise AutomationError("Draft is over 24 hours old. Only reconcile existing publication status; do not send it now.")
-    assert_current(post["product"], products())
+    if post.get("product"):
+        assert_current(post["product"], products())
+    elif post.get("topic") not in TOPICS or not post.get("lesson"):
+        raise AutomationError("Missing reviewed educational content.")
+    if post.get("ai_generated") and "AI-generated" not in post.get("caption", ""):
+        raise AutomationError("AI-generated content requires a visible caption disclosure.")
+    if post.get("topic") == "exploded_view" and "Conceptual" not in post.get("caption", ""):
+        raise AutomationError("Exploded views require a conceptual-illustration disclosure.")
 
 
 def publish_platforms(post, config, store, meta):
@@ -81,6 +91,7 @@ def main(argv=None):
     parser.add_argument("--platform", choices=["facebook", "instagram"], default="facebook")
     parser.add_argument("--resolution", choices=["none", "verified_absent", "published", "cancel"], default="none")
     parser.add_argument("--remote-id", default="")
+    parser.add_argument("--topic", choices=["auto", *TOPICS], default="auto")
     args = parser.parse_args(argv)
     config = load_config()
     day = date.fromisoformat(args.date) if args.date else local_day()
@@ -126,10 +137,9 @@ def main(argv=None):
         summary("Recorded operator resolution. This command does not publish anything.")
         return
     if args.command == "preview":
-        product = select_product(products(), state, day, args.kind, config["excluded_product_ids"])
-        post = plan(product, day, args.kind, config["language"])
+        post = build_plan(config, state, day, args.kind, args.topic)
         file, _ = render(post)
-        summary(f"Preview ready: {file}. Product facts were fetched live. Nothing uploaded publicly or published.")
+        summary(f"Preview ready: {file}. Topic: {post.get('topic', 'product')}. Nothing uploaded publicly or published.")
         return
     if not store.branch_exists:
         raise AutomationError("Run initialize once first. A missing posting ledger must never silently reset history.")
@@ -155,8 +165,7 @@ def main(argv=None):
     slot = f"{day}-{args.kind}"
     post = state["posts"].get(slot)
     if post is None:
-        product = select_product(products(), state, day, args.kind, config["excluded_product_ids"])
-        post = plan(product, day, args.kind, config["language"])
+        post = build_plan(config, state, day, args.kind, args.topic)
         post["publications"] = {p: {"phase": "new", "status": "pending"} for p in config["platforms"]}
         state["posts"][slot] = post
         store.save()

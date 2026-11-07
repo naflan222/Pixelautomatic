@@ -37,8 +37,8 @@ jobs:
           fi
       - name: Render live-data previews without social credentials
         run: |
-          python run.py preview --local --kind image
-          python run.py preview --local --kind video
+          python run.py preview --local --kind image --topic camera_tip
+          python run.py preview --local --kind video --topic camera_explainer
       - name: Save initial previews for Android download
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
