@@ -110,6 +110,58 @@
       },
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/3a67eb2eeb4998870194c867563ff7f7924fc4cb/automation/media/78830694fda2a0ee5bc32513a74bbee12acd844bc465bdea71ee010cc4d36abb.mp4",
       "fingerprint": "b8a8846509d7d2a175c5b60305c3b1c48e64feec1dd82705c13859fdec6b42a6"
+    },
+    "2026-11-08-image": {
+      "slot": "2026-11-08-image",
+      "date": "2026-11-08",
+      "kind": "image",
+      "topic": "camera_tip",
+      "creative_id": "freeze-motion",
+      "headline": "Choose how motion looks",
+      "hook": "Choose how motion looks",
+      "design_seed": 217706963,
+      "product": null,
+      "lesson": {
+        "id": "freeze-motion",
+        "title": "Choose how motion looks",
+        "summary": "A shorter exposure can freeze movement; a longer exposure records more movement as blur. The right shutter speed depends on the subject, focal length and how steadily the camera is held.",
+        "cards": [
+          [
+            "Short exposure",
+            "Can preserve detail in moving subjects."
+          ],
+          [
+            "Long exposure",
+            "Can turn movement into a visible trail."
+          ],
+          [
+            "Test a frame",
+            "Adjust for the movement in your scene."
+          ]
+        ],
+        "diagram": "shutter",
+        "sources": [
+          "https://www.cambridgeincolour.com/tutorials/camera-exposure.htm"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.cambridgeincolour.com/tutorials/camera-exposure.htm"
+      ],
+      "ai_generated": false,
+      "created_at": "2026-11-08T10:06:34.833632+00:00",
+      "language": "en",
+      "caption": "Choose how motion looks\n\nA shorter exposure can freeze movement; a longer exposure records more movement as blur. The right shutter speed depends on the subject, focal length and how steadily the camera is held.\n\n• Short exposure: Can preserve detail in moving subjects.\n• Long exposure: Can turn movement into a visible trail.\n• Test a frame: Adjust for the movement in your scene.\n\nSimplified educational illustration; settings are examples, not universal recommendations.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #PhotographyTips #CameraExplained #PhotographySriLanka #CreatorTips #LearnPhotography",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
