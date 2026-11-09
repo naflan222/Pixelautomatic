@@ -227,9 +227,12 @@
       },
       "publications": {
         "facebook": {
-          "phase": "photo_request",
-          "status": "pending",
-          "updated_at": "2026-11-09T11:21:13.512946+00:00"
+          "phase": "done",
+          "status": "published",
+          "updated_at": "2026-11-09T11:21:18.738331+00:00",
+          "remote_id": "1346502311871253_122131568619471313",
+          "url": "https://www.facebook.com/1346502311871253_122131568619471313",
+          "published_at": "2026-11-09T11:21:18.738313+00:00"
         },
         "instagram": {
           "phase": "new",
