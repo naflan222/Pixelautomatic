@@ -174,6 +174,67 @@
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/2c3aa8adb75490f219275270a2a3a3cc973cf06e/automation/media/82943e16fc44bfff970731a49083d22e4ab3ad678c44af427a0c268a49f1159e.jpg",
       "fingerprint": "82943e16fc44bfff970731a49083d22e4ab3ad678c44af427a0c268a49f1159e"
+    },
+    "2026-11-09-image": {
+      "slot": "2026-11-09-image",
+      "date": "2026-11-09",
+      "kind": "image",
+      "topic": "travel",
+      "creative_id": "tangalle",
+      "headline": "Tangalle: imagine a new perspective",
+      "hook": "Tangalle: imagine a new perspective",
+      "design_seed": 464823085,
+      "product": null,
+      "lesson": {
+        "id": "tangalle",
+        "title": "Tangalle: imagine a new perspective",
+        "summary": "An imagined Sri Lankan landscape inspired by Tangalle. Use the light, layers and composition as inspiration for your own photography.",
+        "cards": [
+          [
+            "Look for light",
+            "Notice soft light and natural contrast."
+          ],
+          [
+            "Build depth",
+            "Find a foreground, middle and background."
+          ],
+          [
+            "Tell a story",
+            "Choose a view with a clear visual subject."
+          ]
+        ],
+        "diagram": "travel",
+        "sources": [
+          "https://www.srilanka.travel/"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.srilanka.travel/"
+      ],
+      "ai_generated": true,
+      "created_at": "2026-11-09T11:17:23.910877+00:00",
+      "language": "en",
+      "caption": "Tangalle: imagine a new perspective\n\nAn imagined Sri Lankan landscape inspired by Tangalle. Use the light, layers and composition as inspiration for your own photography.\n\n• Look for light: Notice soft light and natural contrast.\n• Build depth: Find a foreground, middle and background.\n• Tell a story: Choose a view with a clear visual subject.\n\nAI-generated Sri Lanka-inspired scene. This is visual inspiration, not a photograph of an actual location or event.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #SriLankaTravel #TravelPhotography #AIArt #TravelInspiration #VisitSriLanka",
+      "destination": {
+        "id": "tangalle",
+        "name": "Tangalle",
+        "scene": "Sri Lankan coast inspired by Tangalle, long quiet curved sand beach, leaning coconut palms, clear Indian Ocean surf, natural late afternoon light"
+      },
+      "ai_image": {
+        "provider": "local_cpu",
+        "timeout_seconds": 900
+      },
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
