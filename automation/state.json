@@ -324,10 +324,10 @@
       "sources": [
         "https://www.cambridgeincolour.com/tutorials/camera-lenses.htm"
       ],
-      "ai_generated": false,
+      "ai_generated": true,
       "created_at": "2026-11-10T10:57:45.045977+00:00",
       "language": "en",
-      "caption": "Focal length and your frame\n\nFor the same sensor size, a shorter focal length gives a wider angle of view; a longer focal length narrows it. Perspective also depends on where you place the camera.\n\n• Shorter lens: Includes a wider view on the same sensor.\n• Longer lens: Narrows the view on the same sensor.\n• Camera position: Moving the camera changes perspective.\n\nSimplified educational illustration; settings are examples, not universal recommendations.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #PhotographyTips #CameraExplained #PhotographySriLanka #CameraSettings #LearnPhotography",
+      "caption": "Focal length and your frame\n\nFor the same sensor size, a shorter focal length gives a wider angle of view; a longer focal length narrows it. Perspective also depends on where you place the camera.\n\n• Shorter lens: Includes a wider view on the same sensor.\n• Longer lens: Narrows the view on the same sensor.\n• Camera position: Moving the camera changes perspective.\n\nSimplified educational illustration; settings are examples, not universal recommendations.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #PhotographyTips #CameraExplained #PhotographySriLanka #CameraSettings #LearnPhotography\n\nAI-generated studio background; product photographs and educational diagrams remain separate.",
       "publications": {
         "facebook": {
           "phase": "new",
@@ -337,7 +337,10 @@
           "phase": "new",
           "status": "pending"
         }
-      }
+      },
+      "background_provenance": "Independently generated generic camera studio; not the advertised product.",
+      "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/00f6b8a79f0e7376d6ac981d44528abddef01937/automation/media/fbf4af4290f2edd1f8c8a4203cdab2a64a786461563b966c47971c160b41895f.jpg",
+      "fingerprint": "fbf4af4290f2edd1f8c8a4203cdab2a64a786461563b966c47971c160b41895f"
     }
   }
 }
