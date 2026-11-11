@@ -350,6 +350,68 @@
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/00f6b8a79f0e7376d6ac981d44528abddef01937/automation/media/fbf4af4290f2edd1f8c8a4203cdab2a64a786461563b966c47971c160b41895f.jpg",
       "fingerprint": "fbf4af4290f2edd1f8c8a4203cdab2a64a786461563b966c47971c160b41895f"
+    },
+    "2026-11-11-image": {
+      "slot": "2026-11-11-image",
+      "date": "2026-11-11",
+      "kind": "image",
+      "topic": "accessory_explainer",
+      "creative_id": "accessory-36",
+      "headline": "Adjustable Head Strap Camera Mount",
+      "hook": "Adjustable Head Strap Camera Mount",
+      "design_seed": 960075068,
+      "product": {
+        "id": "36",
+        "name": "Adjustable Head Strap Camera Mount",
+        "price": 1899,
+        "stock": 18,
+        "image": "https://pixelhouse.lk/img/product/accessories-20261109/adjustable-head-strap-mount.webp",
+        "url": "https://pixelhouse.lk/single-product.html?slug=adjustable-head-strap-mount",
+        "category": "GoPro Accessories",
+        "description": "Adjustable head strap for hands-free action camera mounting. For compatible action camera mounts; an appropriate camera adapter may be required.",
+        "verified_at": "2026-11-11T10:39:53.508311+00:00"
+      },
+      "lesson": {
+        "id": "accessory-36",
+        "title": "Adjustable Head Strap Camera Mount",
+        "summary": "Review the store listing for this accessory's details and verify compatibility with your exact camera.",
+        "cards": [
+          [
+            "Store-listed details",
+            "Use the verified product listing."
+          ],
+          [
+            "Check compatibility",
+            "Match camera model and mounting interface."
+          ],
+          [
+            "Fit correctly",
+            "Follow the manufacturer's fitting instructions."
+          ]
+        ],
+        "diagram": "accessory",
+        "sources": [
+          "https://pixelhouse.lk"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://pixelhouse.lk"
+      ],
+      "ai_generated": false,
+      "created_at": "2026-11-11T10:39:53.509304+00:00",
+      "language": "en",
+      "caption": "Adjustable Head Strap Camera Mount\n\nReview the store listing for this accessory's details and verify compatibility with your exact camera.\n\n• Store-listed details: Use the verified product listing.\n• Check compatibility: Match camera model and mounting interface.\n• Fit correctly: Follow the manufacturer's fitting instructions.\n\nCheck your exact camera and mounting interface against the manufacturer's compatibility information before buying or fitting accessories.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #CameraAccessories #CreatorTips #PhotographySriLanka #ContentCreation #CameraGear",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
