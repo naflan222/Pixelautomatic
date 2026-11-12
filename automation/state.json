@@ -536,7 +536,21 @@
           "phase": "new",
           "status": "pending"
         }
-      }
+      },
+      "ai_provenance": {
+        "model": "Lykon/absolute-reality-1.81",
+        "revision": "569d201654dca1426f1e090fca3953acc7db2c30",
+        "seed": 462814971,
+        "steps": 20,
+        "source": "local CPU inference"
+      },
+      "audio_provenance": {
+        "source": "Pixelhouse original procedural composition",
+        "copyrighted_recordings": false,
+        "seed": 462814971
+      },
+      "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/d58dfc1183765027864ebb888dc2fccea655e85e/automation/media/2a6befc865bb4ecf62bbfc280f139946f1630a0025915cb6034387f442f7e66b.mp4",
+      "fingerprint": "f092662ba79e32c9d7c0f9166efbf3f13b2f613003bda40f6e4999a5b324c352"
     }
   }
 }
