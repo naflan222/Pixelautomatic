@@ -537,9 +537,10 @@
           "last_error": "Facebook is still processing. Run reconcile to reuse the saved Reel ID."
         },
         "instagram": {
-          "phase": "container_request",
+          "phase": "container_created",
           "status": "pending",
-          "updated_at": "2026-11-12T20:52:03.240368+00:00"
+          "updated_at": "2026-11-12T20:52:05.204672+00:00",
+          "container_id": "18110147078234268"
         }
       },
       "ai_provenance": {
