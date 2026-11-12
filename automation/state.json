@@ -464,10 +464,12 @@
           "published_at": "2026-11-12T10:51:54.764070+00:00"
         },
         "instagram": {
-          "phase": "publish_request",
-          "status": "pending",
-          "updated_at": "2026-11-12T10:52:06.006241+00:00",
-          "container_id": "18110036801234268"
+          "phase": "done",
+          "status": "published",
+          "updated_at": "2026-11-12T10:52:10.067196+00:00",
+          "container_id": "18110036801234268",
+          "remote_id": "17953548090315011",
+          "published_at": "2026-11-12T10:52:10.067175+00:00"
         }
       },
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
