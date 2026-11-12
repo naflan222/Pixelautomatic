@@ -412,6 +412,58 @@
           "status": "pending"
         }
       }
+    },
+    "2026-11-12-image": {
+      "slot": "2026-11-12-image",
+      "date": "2026-11-12",
+      "kind": "image",
+      "topic": "exploded_view",
+      "creative_id": "camera-layers",
+      "headline": "Inside a camera: the main layers",
+      "hook": "Inside a camera: the main layers",
+      "design_seed": 732908268,
+      "product": null,
+      "lesson": {
+        "id": "camera-layers",
+        "title": "Inside a camera: the main layers",
+        "summary": "This conceptual exploded view separates a lens assembly, aperture, shutter, sensor, processor and display to explain their roles. It is not the internal design of a particular camera.",
+        "cards": [
+          [
+            "Light control",
+            "Lens, aperture and shutter guide exposure."
+          ],
+          [
+            "Light capture",
+            "The sensor converts incoming light to signals."
+          ],
+          [
+            "Image output",
+            "Processing supports storage and display."
+          ]
+        ],
+        "diagram": "exploded",
+        "sources": [
+          "https://www.cambridgeincolour.com/tutorials/camera-sensors.htm"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.cambridgeincolour.com/tutorials/camera-sensors.htm"
+      ],
+      "ai_generated": false,
+      "created_at": "2026-11-12T10:51:39.890970+00:00",
+      "language": "en",
+      "caption": "Inside a camera: the main layers\n\nThis conceptual exploded view separates a lens assembly, aperture, shutter, sensor, processor and display to explain their roles. It is not the internal design of a particular camera.\n\n• Light control: Lens, aperture and shutter guide exposure.\n• Light capture: The sensor converts incoming light to signals.\n• Image output: Processing supports storage and display.\n\nConceptual exploded-view illustration. Not model-specific, not to scale and not a repair guide. Camera designs vary.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #CameraExplained #PhotographyEducation #CameraAnatomy #HowItWorks #CameraTechnology",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
