@@ -529,9 +529,11 @@
       },
       "publications": {
         "facebook": {
-          "phase": "reel_start_request",
+          "phase": "reel_initialized",
           "status": "pending",
-          "updated_at": "2026-11-12T20:45:32.603240+00:00"
+          "updated_at": "2026-11-12T20:45:36.397249+00:00",
+          "remote_id": "955253410999601",
+          "upload_url": "https://rupload.facebook.com/video-upload/v27.0/955253410999601"
         },
         "instagram": {
           "phase": "new",
