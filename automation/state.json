@@ -539,10 +539,11 @@
         "instagram": {
           "phase": "done",
           "status": "published",
-          "updated_at": "2026-11-12T20:52:46.852923+00:00",
+          "updated_at": "2026-11-12T20:52:53.170310+00:00",
           "container_id": "18110147078234268",
           "remote_id": "18132567187769357",
-          "published_at": "2026-11-12T20:52:46.852909+00:00"
+          "published_at": "2026-11-12T20:52:46.852909+00:00",
+          "url": "https://www.instagram.com/reel/Dfp9RHkFTpH/"
         }
       },
       "ai_provenance": {
