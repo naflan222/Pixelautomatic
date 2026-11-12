@@ -464,9 +464,9 @@
           "published_at": "2026-11-12T10:51:54.764070+00:00"
         },
         "instagram": {
-          "phase": "container_created",
+          "phase": "publish_request",
           "status": "pending",
-          "updated_at": "2026-11-12T10:52:04.629151+00:00",
+          "updated_at": "2026-11-12T10:52:06.006241+00:00",
           "container_id": "18110036801234268"
         }
       },
