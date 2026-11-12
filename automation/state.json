@@ -476,6 +476,67 @@
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/d6bf75058a545c31d5b766884a458229b35913c6/automation/media/435bf915a13e66b94296c2beb4e10828e9aa2b112091e7a5682f9b276961530c.jpg",
       "fingerprint": "435bf915a13e66b94296c2beb4e10828e9aa2b112091e7a5682f9b276961530c"
+    },
+    "2026-11-13-video": {
+      "slot": "2026-11-13-video",
+      "date": "2026-11-13",
+      "kind": "video",
+      "topic": "travel",
+      "creative_id": "nuwara-eliya",
+      "headline": "Nuwara Eliya: imagine a new perspective",
+      "hook": "Nuwara Eliya: imagine a new perspective",
+      "design_seed": 462814971,
+      "product": null,
+      "lesson": {
+        "id": "nuwara-eliya",
+        "title": "Nuwara Eliya: imagine a new perspective",
+        "summary": "An imagined Sri Lankan landscape inspired by Nuwara Eliya. Use the light, layers and composition as inspiration for your own photography.",
+        "cards": [
+          [
+            "Look for light",
+            "Notice soft light and natural contrast."
+          ],
+          [
+            "Build depth",
+            "Find a foreground, middle and background."
+          ],
+          [
+            "Tell a story",
+            "Choose a view with a clear visual subject."
+          ]
+        ],
+        "diagram": "travel",
+        "sources": [
+          "https://www.srilanka.travel/"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.srilanka.travel/"
+      ],
+      "ai_generated": true,
+      "created_at": "2026-11-12T20:42:55.389602+00:00",
+      "language": "en",
+      "caption": "Nuwara Eliya: imagine a new perspective\n\nAn imagined Sri Lankan landscape inspired by Nuwara Eliya. Use the light, layers and composition as inspiration for your own photography.\n\n• Look for light: Notice soft light and natural contrast.\n• Build depth: Find a foreground, middle and background.\n• Tell a story: Choose a view with a clear visual subject.\n\nAI-generated Sri Lanka-inspired scene. This is visual inspiration, not a photograph of an actual location or event.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #SriLankaTravel #TravelPhotography #AIArt #LandscapePhotography #TravelInspiration",
+      "destination": {
+        "id": "nuwara-eliya",
+        "name": "Nuwara Eliya",
+        "scene": "Sri Lankan highlands inspired by Nuwara Eliya, neat tea-covered slopes, natural low mist, subtle cool morning light, lush mountain valley"
+      },
+      "ai_image": {
+        "provider": "local_cpu",
+        "timeout_seconds": 900
+      },
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
