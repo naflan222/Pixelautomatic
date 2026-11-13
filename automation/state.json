@@ -560,6 +560,39 @@
       },
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/d58dfc1183765027864ebb888dc2fccea655e85e/automation/media/2a6befc865bb4ecf62bbfc280f139946f1630a0025915cb6034387f442f7e66b.mp4",
       "fingerprint": "f092662ba79e32c9d7c0f9166efbf3f13b2f613003bda40f6e4999a5b324c352"
+    },
+    "2026-11-13-image": {
+      "headline": "Make every adventure count.",
+      "hook": "Your next adventure starts here.",
+      "caption": "Equip your next creative project.\n\nWater Proof Diving Case\n\n45 m waterproof dive housing for GoPro Hero cameras.\n\nPrice: LKR 4,300\n\nExplore product details and order online:\npixelhouse.lk\n\nPixelhouse | Camera & video accessories in Sri Lanka.\n\n#Pixelhouse #CameraAccessories #GoProAccessories #GoProSriLanka #PhotographySriLanka #Photography #Videography",
+      "design_seed": 255026952,
+      "product": {
+        "id": "16",
+        "name": "Water Proof Diving Case",
+        "price": 4300,
+        "stock": 9,
+        "image": "https://pixelhouse.lk/img/product/8.png",
+        "url": "https://pixelhouse.lk/single-product.html?slug=wpdcase",
+        "category": "GoPro Accessories",
+        "description": "45 m waterproof dive housing for GoPro Hero cameras.",
+        "verified_at": "2026-11-13T10:48:02.970148+00:00"
+      },
+      "slot": "2026-11-13-image",
+      "date": "2026-11-13",
+      "kind": "image",
+      "created_at": "2026-11-13T10:48:02.970544+00:00",
+      "topic": "product",
+      "ai_generated": false,
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
