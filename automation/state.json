@@ -593,6 +593,39 @@
           "status": "pending"
         }
       }
+    },
+    "2026-11-14-image": {
+      "headline": "Bring your next story into focus.",
+      "hook": "Your next adventure starts here.",
+      "caption": "Your next story deserves a considered setup.\n\nAction Camera 1/4-inch Tripod Mount Adapter\n\nTripod mount adapter with a 1/4-inch camera connection. For compatible action camera mounts; an appropriate camera adapter may be required.\n\nPrice: LKR 800\n\nView product details and current availability:\npixelhouse.lk\n\nPixelhouse | Camera & video accessories in Sri Lanka.\n\n#Pixelhouse #CameraAccessories #GoProAccessories #GoProSriLanka #PhotographySriLanka #Photography #Videography",
+      "design_seed": 248533228,
+      "product": {
+        "id": "26",
+        "name": "Action Camera 1/4-inch Tripod Mount Adapter",
+        "price": 800,
+        "stock": 10,
+        "image": "https://pixelhouse.lk/img/product/accessories-20261109/tripod-mount-adapter.webp",
+        "url": "https://pixelhouse.lk/single-product.html?slug=tripod-mount-adapter",
+        "category": "GoPro Accessories",
+        "description": "Tripod mount adapter with a 1/4-inch camera connection. For compatible action camera mounts; an appropriate camera adapter may be required.",
+        "verified_at": "2026-11-14T10:03:22.465738+00:00"
+      },
+      "slot": "2026-11-14-image",
+      "date": "2026-11-14",
+      "kind": "image",
+      "created_at": "2026-11-14T10:03:22.466295+00:00",
+      "topic": "product",
+      "ai_generated": false,
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
