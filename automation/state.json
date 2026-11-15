@@ -690,6 +690,58 @@
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/27ec929ae4a993a777b2f65eb988999ae77598d8/automation/media/09271dce10da5c8e9caef964fbf15d8c8083d3ea6a066c73afd6843a11e695a0.jpg",
       "fingerprint": "09271dce10da5c8e9caef964fbf15d8c8083d3ea6a066c73afd6843a11e695a0"
+    },
+    "2026-11-16-video": {
+      "slot": "2026-11-16-video",
+      "date": "2026-11-16",
+      "kind": "video",
+      "topic": "exploded_view",
+      "creative_id": "image-path",
+      "headline": "What happens after light is captured?",
+      "hook": "What happens after light is captured?",
+      "design_seed": 418791052,
+      "product": null,
+      "lesson": {
+        "id": "image-path",
+        "title": "What happens after light is captured?",
+        "summary": "Sensor signals are processed and recorded, and an image can be shown on a display. This is a simplified functional sequence, not an assembly order or repair instruction.",
+        "cards": [
+          [
+            "Sensor",
+            "Creates electrical signals from light."
+          ],
+          [
+            "Processor",
+            "Handles image data and camera functions."
+          ],
+          [
+            "Display",
+            "Shows a processed view of the image."
+          ]
+        ],
+        "diagram": "exploded",
+        "sources": [
+          "https://www.cambridgeincolour.com/tutorials/camera-sensors.htm"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.cambridgeincolour.com/tutorials/camera-sensors.htm"
+      ],
+      "ai_generated": false,
+      "created_at": "2026-11-15T19:18:39.422309+00:00",
+      "language": "en",
+      "caption": "What happens after light is captured?\n\nSensor signals are processed and recorded, and an image can be shown on a display. This is a simplified functional sequence, not an assembly order or repair instruction.\n\n• Sensor: Creates electrical signals from light.\n• Processor: Handles image data and camera functions.\n• Display: Shows a processed view of the image.\n\nConceptual exploded-view illustration. Not model-specific, not to scale and not a repair guide. Camera designs vary.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #CameraExplained #PhotographyEducation #CameraAnatomy #CameraTechnology #LearnPhotography",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
