@@ -728,10 +728,10 @@
       "sources": [
         "https://www.cambridgeincolour.com/tutorials/camera-sensors.htm"
       ],
-      "ai_generated": false,
+      "ai_generated": true,
       "created_at": "2026-11-15T19:18:39.422309+00:00",
       "language": "en",
-      "caption": "What happens after light is captured?\n\nSensor signals are processed and recorded, and an image can be shown on a display. This is a simplified functional sequence, not an assembly order or repair instruction.\n\n• Sensor: Creates electrical signals from light.\n• Processor: Handles image data and camera functions.\n• Display: Shows a processed view of the image.\n\nConceptual exploded-view illustration. Not model-specific, not to scale and not a repair guide. Camera designs vary.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #CameraExplained #PhotographyEducation #CameraAnatomy #CameraTechnology #LearnPhotography",
+      "caption": "What happens after light is captured?\n\nSensor signals are processed and recorded, and an image can be shown on a display. This is a simplified functional sequence, not an assembly order or repair instruction.\n\n• Sensor: Creates electrical signals from light.\n• Processor: Handles image data and camera functions.\n• Display: Shows a processed view of the image.\n\nConceptual exploded-view illustration. Not model-specific, not to scale and not a repair guide. Camera designs vary.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #CameraExplained #PhotographyEducation #CameraAnatomy #CameraTechnology #LearnPhotography\n\nAI-generated studio background; product photographs and educational diagrams remain separate.",
       "publications": {
         "facebook": {
           "phase": "new",
@@ -741,7 +741,15 @@
           "phase": "new",
           "status": "pending"
         }
-      }
+      },
+      "background_provenance": "Independently generated generic camera studio; not the advertised product.",
+      "audio_provenance": {
+        "source": "Pixelhouse original procedural composition",
+        "copyrighted_recordings": false,
+        "seed": 418791052
+      },
+      "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/11011488a4899cf330ed8a1e787623d83a8248e3/automation/media/8e808cf31293db94e38e016680c0583a65df4073c5b26490ed5db254cf4b0e56.mp4",
+      "fingerprint": "bd0417d73eae0ad92529a0351a5968844ec84c0a06be8a058bc6ffae26253fd7"
     }
   }
 }
