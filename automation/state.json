@@ -734,8 +734,9 @@
       "caption": "What happens after light is captured?\n\nSensor signals are processed and recorded, and an image can be shown on a display. This is a simplified functional sequence, not an assembly order or repair instruction.\n\n• Sensor: Creates electrical signals from light.\n• Processor: Handles image data and camera functions.\n• Display: Shows a processed view of the image.\n\nConceptual exploded-view illustration. Not model-specific, not to scale and not a repair guide. Camera designs vary.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #CameraExplained #PhotographyEducation #CameraAnatomy #CameraTechnology #LearnPhotography\n\nAI-generated studio background; product photographs and educational diagrams remain separate.",
       "publications": {
         "facebook": {
-          "phase": "new",
-          "status": "pending"
+          "phase": "reel_start_request",
+          "status": "pending",
+          "updated_at": "2026-11-15T19:18:52.436402+00:00"
         },
         "instagram": {
           "phase": "new",
