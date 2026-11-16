@@ -759,6 +759,67 @@
       },
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/11011488a4899cf330ed8a1e787623d83a8248e3/automation/media/8e808cf31293db94e38e016680c0583a65df4073c5b26490ed5db254cf4b0e56.mp4",
       "fingerprint": "bd0417d73eae0ad92529a0351a5968844ec84c0a06be8a058bc6ffae26253fd7"
+    },
+    "2026-11-16-image": {
+      "slot": "2026-11-16-image",
+      "date": "2026-11-16",
+      "kind": "image",
+      "topic": "travel",
+      "creative_id": "yala",
+      "headline": "Yala: imagine a new perspective",
+      "hook": "Yala: imagine a new perspective",
+      "design_seed": 1341124080,
+      "product": null,
+      "lesson": {
+        "id": "yala",
+        "title": "Yala: imagine a new perspective",
+        "summary": "An imagined Sri Lankan landscape inspired by Yala. Use the light, layers and composition as inspiration for your own photography.",
+        "cards": [
+          [
+            "Look for light",
+            "Notice soft light and natural contrast."
+          ],
+          [
+            "Build depth",
+            "Find a foreground, middle and background."
+          ],
+          [
+            "Tell a story",
+            "Choose a view with a clear visual subject."
+          ]
+        ],
+        "diagram": "travel",
+        "sources": [
+          "https://www.srilanka.travel/"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.srilanka.travel/"
+      ],
+      "ai_generated": true,
+      "created_at": "2026-11-16T10:56:10.542717+00:00",
+      "language": "en",
+      "caption": "Yala: imagine a new perspective\n\nAn imagined Sri Lankan landscape inspired by Yala. Use the light, layers and composition as inspiration for your own photography.\n\n• Look for light: Notice soft light and natural contrast.\n• Build depth: Find a foreground, middle and background.\n• Tell a story: Choose a view with a clear visual subject.\n\nAI-generated Sri Lanka-inspired scene. This is visual inspiration, not a photograph of an actual location or event.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #SriLankaTravel #TravelPhotography #AIArt #LandscapePhotography #TravelInspiration",
+      "destination": {
+        "id": "yala",
+        "name": "Yala",
+        "scene": "Sri Lankan dry-zone landscape inspired by Yala, golden grass, sparse tropical trees, distant low rocky hills, gentle evening sun, no animals or people"
+      },
+      "ai_image": {
+        "provider": "local_cpu",
+        "timeout_seconds": 900
+      },
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
