@@ -812,8 +812,9 @@
       },
       "publications": {
         "facebook": {
-          "phase": "new",
-          "status": "pending"
+          "phase": "photo_request",
+          "status": "pending",
+          "updated_at": "2026-11-16T10:58:32.078037+00:00"
         },
         "instagram": {
           "phase": "new",
