@@ -812,9 +812,12 @@
       },
       "publications": {
         "facebook": {
-          "phase": "photo_request",
-          "status": "pending",
-          "updated_at": "2026-11-16T10:58:32.078037+00:00"
+          "phase": "done",
+          "status": "published",
+          "updated_at": "2026-11-16T10:58:40.182764+00:00",
+          "remote_id": "1346502311871253_122133460527471313",
+          "url": "https://www.facebook.com/1346502311871253_122133460527471313",
+          "published_at": "2026-11-16T10:58:40.182747+00:00"
         },
         "instagram": {
           "phase": "new",
