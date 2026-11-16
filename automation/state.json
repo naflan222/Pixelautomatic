@@ -819,7 +819,16 @@
           "phase": "new",
           "status": "pending"
         }
-      }
+      },
+      "ai_provenance": {
+        "model": "Lykon/absolute-reality-1.81",
+        "revision": "569d201654dca1426f1e090fca3953acc7db2c30",
+        "seed": 1341124080,
+        "steps": 20,
+        "source": "local CPU inference"
+      },
+      "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/81c35d3f36ccb3ce532a49462aa74553e80c422f/automation/media/18782416dff0373f51325c178e47223ff08b9ba433ac75c6fe7bce3f008a2eec.jpg",
+      "fingerprint": "18782416dff0373f51325c178e47223ff08b9ba433ac75c6fe7bce3f008a2eec"
     }
   }
 }
