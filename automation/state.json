@@ -820,10 +820,12 @@
           "published_at": "2026-11-16T10:58:40.182747+00:00"
         },
         "instagram": {
-          "phase": "publish_request",
-          "status": "pending",
-          "updated_at": "2026-11-16T10:58:53.504209+00:00",
-          "container_id": "18111041450234268"
+          "phase": "done",
+          "status": "published",
+          "updated_at": "2026-11-16T10:58:58.891730+00:00",
+          "container_id": "18111041450234268",
+          "remote_id": "17991611883079634",
+          "published_at": "2026-11-16T10:58:58.891711+00:00"
         }
       },
       "ai_provenance": {
