@@ -820,8 +820,9 @@
           "published_at": "2026-11-16T10:58:40.182747+00:00"
         },
         "instagram": {
-          "phase": "new",
-          "status": "pending"
+          "phase": "container_request",
+          "status": "pending",
+          "updated_at": "2026-11-16T10:58:42.503278+00:00"
         }
       },
       "ai_provenance": {
