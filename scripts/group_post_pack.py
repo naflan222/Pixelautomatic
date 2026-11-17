@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
 import re
 import shutil
@@ -17,7 +18,9 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from pixelhouse.core import AutomationError, load_config, plan, products
+from PIL import Image, ImageOps, ImageFilter
+
+from pixelhouse.core import AutomationError, load_config, plan, products, store_image
 from pixelhouse.media import render_image
 
 WHATSAPP = "https://wa.me/94777466675"
@@ -51,6 +54,42 @@ def safe_stem(product):
     return (slug[:42].strip("-") or "product")
 
 
+
+def prepare_source_photo(product):
+    """Use the original website photo, scaling only a local draft copy if small.
+
+    Existing Pixelhouse Page/Instagram renderer enforces 600 px on the shortest
+    edge. Small catalog originals are common; this Group-only step increases
+    pixel dimensions without inventing details or editing the website image.
+    """
+    raw = store_image(product["image"])
+    try:
+        with Image.open(io.BytesIO(raw)) as source:
+            source.load()
+            photo = ImageOps.exif_transpose(source).convert("RGBA")
+    except (OSError, ValueError):
+        raise AutomationError("Source product photo is invalid.") from None
+    width, height = photo.size
+    if min(width, height) < 60:
+        raise AutomationError("Product photo is extremely small; cannot make a useful poster.")
+    factor = max(1.0, 600 / min(width, height))
+    if factor > 1:
+        new_size = (round(width * factor), round(height * factor))
+        # Rendering memory safety for disproportionate images.
+        if max(new_size) > 5500:
+            raise AutomationError("Product photo has an unsuitable aspect ratio.")
+        photo = photo.resize(new_size, Image.Resampling.LANCZOS)
+        photo = photo.filter(ImageFilter.UnsharpMask(radius=1.2, percent=65, threshold=3))
+    buf = io.BytesIO()
+    photo.save(buf, format="PNG", optimize=True)
+    return buf.getvalue(), {
+        "product_id": product["id"],
+        "source_px": [width, height],
+        "render_px": list(photo.size),
+        "enlarged_for_draft": factor > 1,
+        "quality_note": "Upscaling adds pixels, not original photographic detail." if factor > 1 else "",
+    }
+
 def write_pack(count, first_date, output_root):
     config = load_config()
     today = datetime.now(TZ).date()
@@ -65,7 +104,7 @@ def write_pack(count, first_date, output_root):
 
     output_root.mkdir(parents=True, exist_ok=True)
     drafts = output_root / "_render_temp"
-    rows, errors = [], []
+    rows, errors, source_images = [], [], []
     for product in choices:
         if len(rows) >= count:
             break
@@ -74,7 +113,8 @@ def write_pack(count, first_date, output_root):
         post.update(topic="product", ai_generated=False)
         render_dir = drafts / product["id"].replace("/", "_")
         try:
-            assets = render_image(post, render_dir)
+            photo_bytes, image_info = prepare_source_photo(product)
+            assets = render_image(post, render_dir, product_bytes=photo_bytes)
         except (AutomationError, OSError, ValueError) as exc:
             errors.append(f"{product['name']} ({product['id']}): {exc}")
             shutil.rmtree(render_dir, ignore_errors=True)
@@ -90,6 +130,7 @@ def write_pack(count, first_date, output_root):
             f"\nWhatsApp enquiries: {WHATSAPP}"
         )
         (output_root / caption_name).write_text(caption + "\n", encoding="utf-8")
+        source_images.append(image_info)
         rows.append({
             "schedule_date": day.isoformat(),
             "product": product["name"],
@@ -120,6 +161,7 @@ def write_pack(count, first_date, output_root):
         "posting_method": "Facebook Group's built-in manual scheduling",
         "auto_published": False,
         "skipped_products": errors,
+        "source_image_quality": source_images,
     }
     (output_root / "MANIFEST.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (output_root / "HOW-TO-SCHEDULE.txt").write_text(
@@ -143,6 +185,9 @@ def write_pack(count, first_date, output_root):
     )
     print(f"Prepared {len(rows)} unique group-post drafts from {len(choices)} eligible products.")
     print(f"Skipped {len(errors)} products due to image validation.")
+    print(f"Made local draft-only enlarged copies of {sum(i[\u0027enlarged_for_draft\u0027] for i in source_images)} smaller photos.")
+    for reason in errors[:20]:
+        print("Skipped product: " + reason)
     if len(rows) < count:
         print(f"Only {len(rows)} valid drafts were available; requested {count}.")
     return manifest
