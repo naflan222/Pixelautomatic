@@ -1,10 +1,13 @@
 """Smoke tests for the Facebook Group post pack command."""
 import subprocess
+import io
+from unittest.mock import patch
+from PIL import Image
 import sys
 import unittest
 from pathlib import Path
 
-from scripts.group_post_pack import choose_products
+from scripts.group_post_pack import choose_products, prepare_source_photo
 
 
 class GroupPostPackTests(unittest.TestCase):
@@ -31,6 +34,18 @@ class GroupPostPackTests(unittest.TestCase):
         from datetime import date
         result = choose_products(catalog, date(2026, 11, 18), ["5"])
         self.assertEqual([item["id"] for item in result], ["4"])
+
+
+    def test_small_product_photo_is_upscaled_only_in_memory(self):
+        original = Image.new("RGB", (320, 240), "white")
+        stream = io.BytesIO()
+        original.save(stream, format="JPEG")
+        with patch("scripts.group_post_pack.store_image", return_value=stream.getvalue()):
+            rendered, info = prepare_source_photo({"id": "4", "image": "https://pixelhouse.lk/example.jpg"})
+        with Image.open(io.BytesIO(rendered)) as output:
+            self.assertGreaterEqual(min(output.size), 600)
+        self.assertEqual(info["source_px"], [320, 240])
+        self.assertTrue(info["enlarged_for_draft"])
 
 
 if __name__ == "__main__":
