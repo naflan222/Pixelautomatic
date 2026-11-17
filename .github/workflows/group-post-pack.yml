@@ -3,6 +3,10 @@ name: Prepare Pixelhouse Facebook group posts
 # This workflow only creates downloadable drafts.
 # It does not connect to Facebook Groups or publish anything.
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/prepare-group-post-pack.json'
   workflow_dispatch:
     inputs:
       post_count:
@@ -37,7 +41,7 @@ jobs:
           FIRST_DATE: ${{ inputs.first_date }}
         run: |
           python -m scripts.group_post_pack \
-            --count "$POST_COUNT" \
+            --count "${POST_COUNT:-14}" \
             --first-date "$FIRST_DATE"
       - name: Download group-ready photos, captions and schedule
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
