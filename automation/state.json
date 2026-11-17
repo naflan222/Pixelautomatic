@@ -890,8 +890,9 @@
           "published_at": "2026-11-17T11:40:22.624358+00:00"
         },
         "instagram": {
-          "phase": "new",
-          "status": "pending"
+          "phase": "container_request",
+          "status": "pending",
+          "updated_at": "2026-11-17T11:40:23.945055+00:00"
         }
       },
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
