@@ -1,0 +1,48 @@
+name: Prepare Pixelhouse Facebook group posts
+
+# This workflow only creates downloadable drafts.
+# It does not connect to Facebook Groups or publish anything.
+on:
+  workflow_dispatch:
+    inputs:
+      post_count:
+        description: Number of different product posts to prepare
+        type: choice
+        default: '14'
+        options: ['7', '14', '30']
+      first_date:
+        description: 'First day to schedule (YYYY-MM-DD); leave blank for tomorrow in Sri Lanka'
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install Pixelhouse image renderer
+        run: python -m pip install -r requirements.txt
+      - name: Build posts from live Pixelhouse catalog
+        env:
+          POST_COUNT: ${{ inputs.post_count }}
+          FIRST_DATE: ${{ inputs.first_date }}
+        run: |
+          python scripts/group_post_pack.py \
+            --count "$POST_COUNT" \
+            --first-date "$FIRST_DATE"
+      - name: Download group-ready photos, captions and schedule
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pixelhouse-facebook-group-posts-${{ github.run_id }}
+          path: output/facebook-group-post-pack/
+          retention-days: 7
+          if-no-files-found: error
