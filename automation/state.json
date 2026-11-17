@@ -838,6 +838,58 @@
       },
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/81c35d3f36ccb3ce532a49462aa74553e80c422f/automation/media/18782416dff0373f51325c178e47223ff08b9ba433ac75c6fe7bce3f008a2eec.jpg",
       "fingerprint": "18782416dff0373f51325c178e47223ff08b9ba433ac75c6fe7bce3f008a2eec"
+    },
+    "2026-11-17-image": {
+      "slot": "2026-11-17-image",
+      "date": "2026-11-17",
+      "kind": "image",
+      "topic": "camera_explainer",
+      "creative_id": "exposure-triangle",
+      "headline": "Understand the exposure triangle",
+      "hook": "Understand the exposure triangle",
+      "design_seed": 77165121,
+      "product": null,
+      "lesson": {
+        "id": "exposure-triangle",
+        "title": "Understand the exposure triangle",
+        "summary": "Aperture and shutter duration affect how much light is recorded. ISO influences image brightness and the camera's signal processing; raising ISO does not make the sensor collect more photons.",
+        "cards": [
+          [
+            "Aperture",
+            "Changes the size of the lens opening."
+          ],
+          [
+            "Shutter duration",
+            "Changes the time light is recorded."
+          ],
+          [
+            "ISO",
+            "Changes brightness and processing choices."
+          ]
+        ],
+        "diagram": "triangle",
+        "sources": [
+          "https://www.cambridgeincolour.com/tutorials/camera-exposure.htm"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://www.cambridgeincolour.com/tutorials/camera-exposure.htm"
+      ],
+      "ai_generated": false,
+      "created_at": "2026-11-17T11:40:10.539995+00:00",
+      "language": "en",
+      "caption": "Understand the exposure triangle\n\nAperture and shutter duration affect how much light is recorded. ISO influences image brightness and the camera's signal processing; raising ISO does not make the sensor collect more photons.\n\n• Aperture: Changes the size of the lens opening.\n• Shutter duration: Changes the time light is recorded.\n• ISO: Changes brightness and processing choices.\n\nSimplified educational illustration; settings are examples, not universal recommendations.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #PhotographyTips #CameraExplained #PhotographySriLanka #CameraSettings #LearnPhotography",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
