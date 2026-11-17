@@ -36,7 +36,7 @@ jobs:
           POST_COUNT: ${{ inputs.post_count }}
           FIRST_DATE: ${{ inputs.first_date }}
         run: |
-          python scripts/group_post_pack.py \
+          python -m scripts.group_post_pack \
             --count "$POST_COUNT" \
             --first-date "$FIRST_DATE"
       - name: Download group-ready photos, captions and schedule
