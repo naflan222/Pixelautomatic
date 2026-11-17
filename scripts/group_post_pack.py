@@ -185,7 +185,7 @@ def write_pack(count, first_date, output_root):
     )
     print(f"Prepared {len(rows)} unique group-post drafts from {len(choices)} eligible products.")
     print(f"Skipped {len(errors)} products due to image validation.")
-    print(f"Made local draft-only enlarged copies of {sum(i[\u0027enlarged_for_draft\u0027] for i in source_images)} smaller photos.")
+    print(f"Made local draft-only enlarged copies of {sum(i['enlarged_for_draft'] for i in source_images)} smaller photos.")
     for reason in errors[:20]:
         print("Skipped product: " + reason)
     if len(rows) < count:
