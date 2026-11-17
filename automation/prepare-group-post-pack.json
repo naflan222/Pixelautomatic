@@ -1,7 +1,8 @@
 {
-  "request": "Generate Pixelhouse Facebook Group product pack",
+  "request": "Regenerate Pixelhouse Facebook Group product pack with small-source-photo support",
   "requested_at": "2026-11-17",
   "posts": 14,
   "first_date": "2026-11-18",
-  "note": "Draft-only test. No Facebook publication. Workflow uses 14 posts and tomorrow by default."
+  "draft_only": true,
+  "revision": 2
 }
