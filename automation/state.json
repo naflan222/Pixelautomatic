@@ -902,6 +902,68 @@
       "background_provenance": "Independently generated generic camera studio; not the advertised product.",
       "media_url": "https://raw.githubusercontent.com/naflan222/Pixelautomatic/57734c28a7f4d14b7e380723de42fb569ac3389b/automation/media/7d471f3a45a168e2ffa368516dec96fb644a4b238e10ca0692162918869ae9fd.jpg",
       "fingerprint": "7d471f3a45a168e2ffa368516dec96fb644a4b238e10ca0692162918869ae9fd"
+    },
+    "2026-11-18-image": {
+      "slot": "2026-11-18-image",
+      "date": "2026-11-18",
+      "kind": "image",
+      "topic": "accessory_explainer",
+      "creative_id": "accessory-27",
+      "headline": "360° Rotating J-Hook Camera Mount",
+      "hook": "360° Rotating J-Hook Camera Mount",
+      "design_seed": 2195528459,
+      "product": {
+        "id": "27",
+        "name": "360° Rotating J-Hook Camera Mount",
+        "price": 800,
+        "stock": 15,
+        "image": "https://pixelhouse.lk/img/product/accessories-20261109/rotating-j-hook-mount.webp",
+        "url": "https://pixelhouse.lk/single-product.html?slug=rotating-j-hook-mount",
+        "category": "GoPro Accessories",
+        "description": "Rotating J-hook mounting adapter for adjusting the camera angle. For compatible action camera mounts; an appropriate camera adapter may be required.",
+        "verified_at": "2026-11-18T11:45:01.557512+00:00"
+      },
+      "lesson": {
+        "id": "accessory-27",
+        "title": "360° Rotating J-Hook Camera Mount",
+        "summary": "Rotating J-hook mounting adapter for adjusting the camera angle. For compatible action camera mounts; an appropriate camera adapter may be required.",
+        "cards": [
+          [
+            "Store-listed details",
+            "Use the verified product listing."
+          ],
+          [
+            "Check compatibility",
+            "Match camera model and mounting interface."
+          ],
+          [
+            "Fit correctly",
+            "Follow the manufacturer's fitting instructions."
+          ]
+        ],
+        "diagram": "accessory",
+        "sources": [
+          "https://pixelhouse.lk"
+        ],
+        "disclosure": "Simplified educational illustration; settings are examples, not universal recommendations."
+      },
+      "sources": [
+        "https://pixelhouse.lk"
+      ],
+      "ai_generated": false,
+      "created_at": "2026-11-18T11:45:01.558094+00:00",
+      "language": "en",
+      "caption": "360° Rotating J-Hook Camera Mount\n\nRotating J-hook mounting adapter for adjusting the camera angle. For compatible action camera mounts; an appropriate camera adapter may be required.\n\n• Store-listed details: Use the verified product listing.\n• Check compatibility: Match camera model and mounting interface.\n• Fit correctly: Follow the manufacturer's fitting instructions.\n\nCheck your exact camera and mounting interface against the manufacturer's compatibility information before buying or fitting accessories.\n\nLearn more with Pixelhouse.\npixelhouse.lk\n\n#Pixelhouse #CameraAccessories #CreatorTips #PhotographySriLanka #ContentCreation #CameraGear",
+      "publications": {
+        "facebook": {
+          "phase": "new",
+          "status": "pending"
+        },
+        "instagram": {
+          "phase": "new",
+          "status": "pending"
+        }
+      }
     }
   }
 }
