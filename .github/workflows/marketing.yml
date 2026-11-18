@@ -62,7 +62,6 @@ jobs:
       - name: Read automation on/off switch
         id: gate
         env:
-          AUTOMATION_ENABLED: ${{ vars.AUTOMATION_ENABLED }}
           EVENT_NAME: ${{ github.event_name }}
           CRON: ${{ github.event.schedule }}
           INPUT_COMMAND: ${{ inputs.command }}
@@ -75,7 +74,7 @@ jobs:
           from pixelhouse.content import rotation_topic
           config = load_config()
           enabled = automation_enabled(config)
-          allowed = os.environ['EVENT_NAME'] == 'workflow_dispatch' or enabled
+          allowed = enabled
           kind = os.environ.get("INPUT_KIND") or "image"
           command = os.environ.get("INPUT_COMMAND") or "preview"
           if os.environ["EVENT_NAME"] == "schedule":
@@ -124,7 +123,6 @@ jobs:
           META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
           FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID }}
-          AUTOMATION_ENABLED: ${{ vars.AUTOMATION_ENABLED }}
           EVENT_NAME: ${{ github.event_name }}
           CRON: ${{ github.event.schedule }}
           INPUT_COMMAND: ${{ inputs.command }}
